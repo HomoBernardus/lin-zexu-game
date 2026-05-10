@@ -73,7 +73,7 @@ const initialNPCs = {
     id: 'zhou' as const,
     name: '周',
     nickname: '小周',
-    title: '技术部·前端',
+    title: '技术部',
     affinity: 60,
     prestigePath: 0,
     popularityPath: 0,

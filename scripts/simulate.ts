@@ -161,7 +161,7 @@ const initialNPCs = {
   wang: { id: 'wang' as const, name: '王', nickname: '小王', title: '技术部', affinity: 40, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#7CB518' },
   chen: { id: 'chen' as const, name: '陈', nickname: '陈哥', title: 'HR', affinity: 45, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#FF8C69' },
   li: { id: 'li' as const, name: '李', nickname: '李总', title: '副总经理', affinity: 35, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#6C91B2' },
-  zhou: { id: 'zhou' as const, name: '周', nickname: '小周', title: '技术部·前端', affinity: 60, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#E07B39' },
+  zhou: { id: 'zhou' as const, name: '周', nickname: '小周', title: '技术部', affinity: 60, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#E07B39' },
 };
 
 // ====== 结果类型 ======
