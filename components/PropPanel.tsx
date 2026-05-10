@@ -104,8 +104,8 @@ export default function PropPanel() {
           <span>今日健康衰减估算</span>
           <span className={`font-mono font-medium ${drainBonus}`}>
             {(() => {
-              const min = currentProp ? Math.max(0, 5 - currentProp.protection) : 5;
-              const max = currentProp ? Math.max(0, 9 - currentProp.protection) : 9;
+              const min = currentProp ? Math.max(0, 3 - currentProp.protection) : 3;
+              const max = currentProp ? Math.max(0, 6 - currentProp.protection) : 6;
               return min === max ? `-${min}` : `-${min} ~ -${max}`;
             })()}
           </span>

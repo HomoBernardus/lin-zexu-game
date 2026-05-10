@@ -238,7 +238,7 @@ export const useGameStore = create<GameStore>()(
           newRemainingDays = GAME_CONFIG.MODIFIER_DURATION_DAYS;
         }
 
-        // 健康衰减：基础5 + 周关键词加成 - 道具防护
+        // 健康衰减：基础 + 周关键词加成 - 道具防护
         const equipped = state.equippedProp
           ? propDefs.find(p => p.id === state.equippedProp)
           : null;
@@ -255,6 +255,11 @@ export const useGameStore = create<GameStore>()(
           if (costDelta.popularity) newStats.popularity = Math.max(0, newStats.popularity + costDelta.popularity);
           if (costDelta.favor) newStats.favor = Math.max(0, newStats.favor + costDelta.favor);
           if (costDelta.risk) newStats.risk = Math.min(100, newStats.risk + costDelta.risk);
+        }
+
+        // 风险自然衰减（每N天降1点）
+        if (newDay % GAME_CONFIG.RISK_DECAY_INTERVAL === 0) {
+          newStats.risk = Math.max(0, newStats.risk - 1);
         }
 
         // 检查游戏结束条件

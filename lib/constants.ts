@@ -33,7 +33,8 @@ export const GAME_CONFIG = {
   MODIFIER_DURATION_DAYS: 7,
 
   // 健康衰减
-  BASE_HEALTH_DRAIN: 4,
+  BASE_HEALTH_DRAIN: 2,
+  RISK_DECAY_INTERVAL: 2,
 };
 
 export const STAT_LABELS: Record<keyof GameStats, { name: string; color: string; icon: string }> = {

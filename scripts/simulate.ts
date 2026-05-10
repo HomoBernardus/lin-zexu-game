@@ -75,10 +75,12 @@ function pickChoice(choices: Choice[], strategy: ChoiceStrategy, seed: number): 
       });
 
     case 'risky':
-      // 选 prestige 最高，无视 risk
-      return choices.reduce((best, c) =>
-        (c.delta.prestige ?? 0) > (best.delta.prestige ?? 0) ? c : best
-      );
+      // 主攻 prestige，但规避极端风险（risk -0.2）+ 略重视 favor（+0.3）
+      return choices.reduce((best, c) => {
+        const cScore = (c.delta.prestige ?? 0) * 1.0 - (c.delta.risk ?? 0) * 0.2 + (c.delta.favor ?? 0) * 0.3;
+        const bScore = (best.delta.prestige ?? 0) * 1.0 - (best.delta.risk ?? 0) * 0.2 + (best.delta.favor ?? 0) * 0.3;
+        return cScore > bScore ? c : best;
+      });
 
     case 'balanced': {
       // 五项 delta 加权总和（risk 权重为负）
@@ -334,6 +336,11 @@ function simulateOne(test: TestCase): SimulationResult {
         if (equipped.dailyCost.favor) stats.favor = Math.max(0, stats.favor + equipped.dailyCost.favor);
         if (equipped.dailyCost.risk) stats.risk = Math.min(100, stats.risk + equipped.dailyCost.risk);
       }
+    }
+
+    // === 风险自然衰减（每N天降1点） ===
+    if (day % GAME_CONFIG.RISK_DECAY_INTERVAL === 0) {
+      stats.risk = Math.max(0, stats.risk - 1);
     }
 
     // === 花园 ===

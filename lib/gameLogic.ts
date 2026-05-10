@@ -131,14 +131,14 @@ export function determineEnding(state: GameState): EndingType {
     state.npcs.li.isConquered,
   ].filter(Boolean).length;
 
-  // 隐藏结局：完美通关（3 NPC + 极高支持率，需 100 支持率兜底）
+  // 隐藏结局：完美通关（3 NPC + 极高支持率）
   if (conqueredCount === 3 && support >= 108) return 'perfect_triumph';
 
-  // 隐藏结局：孤狼 — 不看support，只看是否纯靠影响力单走
-  if (state.stats.prestige >= 65 && state.stats.popularity <= 35) return 'lone_wolf';
+  // 隐藏结局：孤狼 — 高影响力但低人缘
+  if (state.stats.prestige >= 55 && state.stats.popularity <= 45) return 'lone_wolf';
 
   // 主要结局
-  if (support >= 85 && conqueredCount >= 2) return 'success_full';
+  if (support >= 72 && conqueredCount >= 2) return 'success_full';
   if (support >= 40 && conqueredCount >= 1) return 'success_partial';
 
   // 活着但没有盟友
