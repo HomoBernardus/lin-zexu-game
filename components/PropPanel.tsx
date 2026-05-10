@@ -103,7 +103,11 @@ export default function PropPanel() {
         <div className="flex items-center justify-between text-[10px] text-[#9B8B7A] mb-1">
           <span>今日健康衰减估算</span>
           <span className={`font-mono font-medium ${drainBonus}`}>
-            {currentProp ? `-${Math.max(0, 5 - currentProp.protection)} ~ -${Math.max(0, 9 - currentProp.protection)}` : '-5 ~ -9'}
+            {(() => {
+              const min = currentProp ? Math.max(0, 5 - currentProp.protection) : 5;
+              const max = currentProp ? Math.max(0, 9 - currentProp.protection) : 9;
+              return min === max ? `-${min}` : `-${min} ~ -${max}`;
+            })()}
           </span>
         </div>
 
