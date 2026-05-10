@@ -11,6 +11,7 @@ import NPCStatus from '@/components/NPCStatus';
 import PropPanel from '@/components/PropPanel';
 import EndingScreen from '@/components/EndingScreen';
 import SplashScreen from '@/components/SplashScreen';
+import CollapsibleSection from '@/components/CollapsibleSection';
 import { week1Events, week2Events, week3Events, week4Events } from '@/data/events';
 
 const allEvents = [...week1Events, ...week2Events, ...week3Events, ...week4Events];
@@ -117,18 +118,26 @@ export default function Home() {
         </section>
 
         {/* 左侧面板 */}
-        <aside className="lg:col-span-1 space-y-4">
+        <aside className="lg:col-span-1 space-y-3">
           <div className="animate-fade-in">
-            <Dashboard />
+            <CollapsibleSection icon="📊" title="数值面板">
+              <Dashboard />
+            </CollapsibleSection>
           </div>
           <div className="animate-fade-in-delayed">
-            <NPCStatus />
+            <CollapsibleSection icon="👥" title="同事关系">
+              <NPCStatus />
+            </CollapsibleSection>
           </div>
           <div className="animate-fade-in-delayed">
-            <Garden />
+            <CollapsibleSection icon="🌸" title="精神后花园">
+              <Garden />
+            </CollapsibleSection>
           </div>
           <div className="animate-fade-in-delayed">
-            <PropPanel />
+            <CollapsibleSection icon="🛡️" title="防身利器">
+              <PropPanel />
+            </CollapsibleSection>
           </div>
         </aside>
       </div>
