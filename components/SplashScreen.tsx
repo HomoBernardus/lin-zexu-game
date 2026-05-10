@@ -71,7 +71,7 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
         {/* 叙事文案 */}
         <div className="text-left space-y-5 mb-12">
           <p className="text-[#5C554D] leading-relaxed text-sm md:text-base">
-            我叫林则徐，一家不大不小的公司里一个不起眼的白领。
+            我姓林，一家不大不小的公司里一个不起眼的白领。
           </p>
           <p className="text-[#5C554D] leading-relaxed text-sm md:text-base">
             每天挤地铁打卡，坐在格子间里写文档、开周会、凑绩效。隔壁工位的兄弟一根接一根地抽烟，会议室里永远飘着灰蒙蒙的雾——二手烟熏得我眼睛发酸、胸口发闷，可大家都是这么过的。

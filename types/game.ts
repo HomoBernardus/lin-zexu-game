@@ -10,6 +10,11 @@ export interface GameStats {
   risk: number;        // HR风险 0-100
 }
 
+export interface NPCBio {
+  intro: string;
+  quote: string | null;
+}
+
 export interface NPC {
   id: 'wang' | 'chen' | 'li' | 'zhou';
   name: string;
