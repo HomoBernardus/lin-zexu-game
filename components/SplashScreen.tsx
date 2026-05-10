@@ -74,13 +74,13 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
             我姓林，一家不大不小的公司里一个不起眼的白领。
           </p>
           <p className="text-[#5C554D] leading-relaxed text-sm md:text-base">
-            每天挤地铁打卡，坐在格子间里写文档、开周会、凑绩效。隔壁工位的兄弟一根接一根地抽烟，会议室里永远飘着灰蒙蒙的雾——二手烟熏得我眼睛发酸、胸口发闷，可大家都是这么过的。
+            每天挤地铁打卡，坐在格子间里写文档、开周会、凑绩效。隔壁工位的同事一根接一根地抽烟，会议室里永远飘着灰蒙蒙的雾——二手烟熏得我眼睛发酸、胸口发闷，可大家都是这么过的。
           </p>
           <p className="text-[#5C554D] leading-relaxed text-sm md:text-base">
             直到那天晚上，我做了一个很长很长的梦。
           </p>
           <p className="text-[#5C554D] leading-relaxed text-sm md:text-base">
-            梦里有个穿朝服的人站在虎门海滩上，身后是一箱箱被砸碎的鸦片，海风把他的袍角吹得猎猎作响。他转过身来，我看见了和我一模一样的脸。
+            梦里有个穿朝服的人站在虎门海滩上，身后是一箱箱被砸碎的鸦片，海风把他的袍角吹得猎猎作响。他转过身来，我透过那张脸看到了和我一模一样的灵魂。
           </p>
           <p className="text-[#5C554D] leading-relaxed text-sm md:text-base">
             醒来之后我就知道，有些事不能再等了。
