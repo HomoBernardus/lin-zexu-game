@@ -11,6 +11,7 @@ import NPCStatus from '@/components/NPCStatus';
 import PropPanel from '@/components/PropPanel';
 import EndingScreen from '@/components/EndingScreen';
 import SplashScreen from '@/components/SplashScreen';
+import Toast from '@/components/Toast';
 import MobilePanels from '@/components/MobilePanels';
 import { week1Events, week2Events, week3Events, week4Events } from '@/data/events';
 
@@ -86,6 +87,7 @@ export default function Home() {
 
   return (
     <main className={`game-container transition-opacity duration-500 ${pageVisible ? 'opacity-100' : 'opacity-0'}`}>
+      <Toast />
       {/* 标题 */}
       <header className="mb-6 md:mb-8">
         <h1 className="text-xl md:text-2xl font-serif text-[#2D2420] tracking-wider text-center">

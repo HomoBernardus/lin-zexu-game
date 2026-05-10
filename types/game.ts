@@ -123,6 +123,13 @@ export interface GameState {
   ending: string | null;
 }
 
+export interface GameNotification {
+  type: 'prop' | 'npc';
+  icon: string;
+  title: string;
+  message: string;
+}
+
 export interface GameSave {
   version: string;
   timestamp: number;

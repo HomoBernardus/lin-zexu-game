@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { GameState, GameEvent, Choice, WeeklyModifier, PropType } from '@/types/game';
+import { GameState, GameEvent, Choice, WeeklyModifier, PropType, GameNotification } from '@/types/game';
 import { GAME_CONFIG } from '@/lib/constants';
 import { getRandomModifier } from '@/data/weeklyModifiers';
 import { props as propDefs } from '@/data/props';
@@ -19,6 +19,7 @@ function getHealthDrainBonus(modifier: WeeklyModifier | null): number {
 }
 
 interface GameStore extends GameState {
+  notification: GameNotification | null;
   // Actions
   initializeGame: () => void;
   applyChoice: (choice: Choice, event: GameEvent) => void;
@@ -26,6 +27,7 @@ interface GameStore extends GameState {
   gardenAction: (actionType: 'prune' | 'water' | 'meditate') => void;
   equipProp: (propType: PropType) => void;
   unequipProp: () => void;
+  clearNotification: () => void;
   saveGame: () => void;
   loadGame: (saveData: GameState) => void;
   resetGame: () => void;
@@ -101,6 +103,7 @@ export const useGameStore = create<GameStore>()(
       gardenUsedToday: false,
       gameOver: false,
       ending: null,
+      notification: null,
 
       // 初始化游戏
       initializeGame: () => {
@@ -120,6 +123,7 @@ export const useGameStore = create<GameStore>()(
           gardenUsedToday: false,
           gameOver: false,
           ending: null,
+          notification: null,
         });
       },
 
@@ -130,20 +134,20 @@ export const useGameStore = create<GameStore>()(
 
         // 应用数值变化
         const newStats = applyDelta(state.stats, choice.delta, state.weeklyModifier);
-        
+
         // 更新NPC好感度
-        const newNpcs = choice.npcAffect 
+        const newNpcs = choice.npcAffect
           ? updateNPCAffinity(state.npcs, choice.npcAffect)
           : state.npcs;
-        
-        // 检查NPC是否攻略成功
+
+        // 检查NPC是否攻略成功 + 记录新攻略
         let updatedNpcs = { ...newNpcs };
-        let changed = false;
+        const conqueredNpcs: string[] = [];
         Object.keys(updatedNpcs).forEach((key) => {
           const npcKey = key as keyof typeof updatedNpcs;
           if (!updatedNpcs[npcKey].isConquered && checkNPCConquest(updatedNpcs[npcKey])) {
             updatedNpcs[npcKey].isConquered = true;
-            changed = true;
+            conqueredNpcs.push(npcKey);
           }
         });
 
@@ -158,14 +162,40 @@ export const useGameStore = create<GameStore>()(
 
         // 道具奖励
         const newInventory = { ...state.inventory };
-        if (choice.propReward) {
+        let acquiredProp: PropType | null = null;
+        if (choice.propReward && !state.inventory[choice.propReward]) {
           newInventory[choice.propReward] = true;
+          acquiredProp = choice.propReward;
+        }
+
+        // 生成通知
+        let notification: GameNotification | null = null;
+        if (acquiredProp) {
+          const propDef = propDefs.find(p => p.id === acquiredProp);
+          if (propDef) {
+            notification = {
+              type: 'prop',
+              icon: propDef.icon,
+              title: '获得新道具',
+              message: `${propDef.name} — ${propDef.description}`,
+            };
+          }
+        } else if (conqueredNpcs.length > 0) {
+          const npcKey = conqueredNpcs[0];
+          const npc = updatedNpcs[npcKey as keyof typeof updatedNpcs];
+          notification = {
+            type: 'npc',
+            icon: '🤝',
+            title: '攻略成功',
+            message: `${npc.nickname}（${npc.title}）已成为你的盟友`,
+          };
         }
 
         set({
           stats: newStats,
           npcs: updatedNpcs,
           inventory: newInventory,
+          notification,
           butterflyLog: choice.butterflyFlag
             ? [...state.butterflyLog, { eventId: event.id, choiceId: choice.id, flag: choice.butterflyFlag, day: state.day }]
             : state.butterflyLog,
@@ -293,6 +323,9 @@ export const useGameStore = create<GameStore>()(
         if (!state.equippedProp) return;
         set({ equippedProp: null });
       },
+
+      // 清除通知
+      clearNotification: () => set({ notification: null }),
 
       // 存档
       saveGame: () => {
