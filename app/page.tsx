@@ -96,23 +96,9 @@ export default function Home() {
       </header>
 
       {/* 主体布局 */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5">
-        {/* 左侧面板 */}
-        <aside className="lg:col-span-1 space-y-4">
-          <div className="animate-fade-in">
-            <Dashboard />
-          </div>
-          <div className="animate-fade-in-delayed grid grid-cols-2 lg:grid-cols-1 gap-4">
-            <NPCStatus />
-            <Garden />
-          </div>
-          <div className="animate-fade-in-delayed">
-            <PropPanel />
-          </div>
-        </aside>
-
-        {/* 右侧：事件卡片 */}
-        <section className="lg:col-span-2">
+      <div className="flex flex-col lg:grid lg:grid-cols-3 gap-4 md:gap-5">
+        {/* 事件卡片：移动端置顶 */}
+        <section className="lg:col-span-2 lg:order-last">
           <div className="animate-fade-in">
             {currentEvent ? (
               <EventCard key={currentEvent.id} event={currentEvent} onComplete={handleEventComplete} />
@@ -129,6 +115,22 @@ export default function Home() {
             )}
           </div>
         </section>
+
+        {/* 左侧面板 */}
+        <aside className="lg:col-span-1 space-y-4">
+          <div className="animate-fade-in">
+            <Dashboard />
+          </div>
+          <div className="animate-fade-in-delayed">
+            <NPCStatus />
+          </div>
+          <div className="animate-fade-in-delayed">
+            <Garden />
+          </div>
+          <div className="animate-fade-in-delayed">
+            <PropPanel />
+          </div>
+        </aside>
       </div>
 
       {/* 底部 */}
