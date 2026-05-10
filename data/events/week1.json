@@ -1,0 +1,887 @@
+{
+  "week": 1,
+  "title": "试探期",
+  "events": [
+    {
+      "day": 1,
+      "phase": "morning",
+      "title": "入职第一天",
+      "description": "你站在写字楼大厅，手里攥着工牌。电梯门打开的瞬间，一股烟味扑面而来。深呼吸，你走了进去。",
+      "choices": [
+        {
+          "id": "w1d1_silent",
+          "text": "默默打开手机空气检测APP",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": 0,
+            "favor": 1,
+            "risk": 0
+          },
+          "butterflyFlag": "day1_observed"
+        },
+        {
+          "id": "w1d1_complain",
+          "text": "「您好，电梯内禁止吸烟」",
+          "delta": {
+            "health": -1,
+            "popularity": -4,
+            "prestige": 3,
+            "favor": -2,
+            "risk": 8
+          },
+          "butterflyFlag": "day1_confronted",
+          "npcAffect": {
+            "wang": -2,
+            "chen": -4,
+            "li": -3
+          }
+        },
+        {
+          "id": "w1d1_neutral",
+          "text": "低头看手机，假装没注意",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": -1,
+            "favor": 0,
+            "risk": 0
+          }
+        }
+      ],
+      "id": "w1d1_morning"
+    },
+    {
+      "day": 1,
+      "phase": "noon",
+      "title": "食堂相遇",
+      "description": "端着餐盘，你发现角落有个空位。坐下的瞬间，对面的年轻人抬头看了你一眼——是小王，技术部那个总被烟味熏得咳嗽的程序员。",
+      "choices": [
+        {
+          "id": "w1d1_friendly",
+          "text": "「这里的菜还行吗？」",
+          "delta": {
+            "health": -1,
+            "popularity": 6,
+            "prestige": 0,
+            "favor": 1,
+            "risk": 0
+          },
+          "npcAffect": {
+            "wang": 12,
+            "li": 0
+          },
+          "butterflyFlag": "met_wang_friendly"
+        },
+        {
+          "id": "w1d1_direct",
+          "text": "「你也受不了烟味？」",
+          "delta": {
+            "health": 0,
+            "popularity": 2,
+            "prestige": 2,
+            "favor": -1,
+            "risk": 3
+          },
+          "npcAffect": {
+            "wang": 8,
+            "chen": -1,
+            "li": 0
+          },
+          "butterflyFlag": "wang_alliance_hint"
+        },
+        {
+          "id": "w1d1_quiet",
+          "text": "安静吃饭，没有说话",
+          "delta": {
+            "health": -1,
+            "popularity": -1,
+            "prestige": 0,
+            "favor": 0,
+            "risk": 0
+          }
+        }
+      ],
+      "id": "w1d1_noon"
+    },
+    {
+      "day": 1,
+      "phase": "evening",
+      "title": "下班后的楼道",
+      "description": "你路过楼梯间，门缝里飘出浓烈的烟味。推开门，一个四十多岁的男人靠在窗边抽烟，胸牌上写着「行政部·赵德柱」。他瞥了你一眼，没说话。",
+      "choices": [
+        {
+          "id": "w1d1_eve_ignore",
+          "text": "默默关上门离开",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": 0,
+            "favor": 0,
+            "risk": 0
+          },
+          "butterflyFlag": "met_zhao_quiet"
+        },
+        {
+          "id": "w1d1_eve_nod",
+          "text": "点头致意，然后离开",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": 1,
+            "favor": 0,
+            "risk": 0
+          },
+          "npcAffect": {
+            "wang": 2,
+            "chen": 3
+          },
+          "butterflyFlag": "zhao_nod"
+        },
+        {
+          "id": "w1d1_eve_sign",
+          "text": "「您好，楼道禁止吸烟，那边有吸烟区」",
+          "delta": {
+            "health": -1,
+            "popularity": -6,
+            "prestige": 3,
+            "favor": -2,
+            "risk": 5
+          },
+          "butterflyFlag": "zhao_confronted_day1"
+        }
+      ],
+      "id": "w1d1_evening"
+    },
+    {
+      "day": 2,
+      "phase": "morning",
+      "title": "工位旁的烟灰缸",
+      "description": "你发现工位隔壁的老刘桌面上摆着一个搪瓷烟灰缸，已经堆满了烟头。他正叼着烟敲键盘，烟灰落在你的文件上。",
+      "choices": [
+        {
+          "id": "w1d2_move",
+          "text": "把文件挪远一点，没有出声",
+          "delta": {
+            "health": -1,
+            "popularity": 1,
+            "prestige": -2,
+            "favor": 0,
+            "risk": 0
+          },
+          "butterflyFlag": "liu_bear_it"
+        },
+        {
+          "id": "w1d2_polite_ask",
+          "text": "「刘哥，能不能把烟灭了？我肺不太好」",
+          "delta": {
+            "health": 0,
+            "popularity": -3,
+            "prestige": 1,
+            "favor": 1,
+            "risk": 3
+          },
+          "butterflyFlag": "liu_polite_confront"
+        },
+        {
+          "id": "w1d2_hr",
+          "text": "去找HR反映情况",
+          "delta": {
+            "health": 0,
+            "popularity": -8,
+            "prestige": 1,
+            "favor": -1,
+            "risk": 1
+          },
+          "npcAffect": {
+            "chen": 9
+          },
+          "butterflyFlag": "reported_to_hr_day2"
+        }
+      ],
+      "id": "w1d2_morning"
+    },
+    {
+      "day": 2,
+      "phase": "afternoon",
+      "title": "茶水间的陈哥",
+      "description": "午后的茶水间，HR陈哥正在泡茶。他看见你，笑了笑：「新来的？喝杯陈皮茶吧，对肺好。」",
+      "choices": [
+        {
+          "id": "w1d2_accept",
+          "text": "接过茶杯，表示感谢",
+          "delta": {
+            "health": 0,
+            "popularity": 5,
+            "prestige": 1,
+            "favor": 1,
+            "risk": -1
+          },
+          "npcAffect": {
+            "chen": 12
+          },
+          "butterflyFlag": "chen_friendly"
+        },
+        {
+          "id": "w1d2_decline",
+          "text": "「谢谢陈哥，但我更想推动公司禁烟」",
+          "delta": {
+            "health": -1,
+            "popularity": -3,
+            "prestige": 3,
+            "favor": -2,
+            "risk": 4
+          },
+          "npcAffect": {
+            "wang": 3,
+            "chen": -2,
+            "li": 6
+          },
+          "butterflyFlag": "declared_intent"
+        },
+        {
+          "id": "w1d2_polite",
+          "text": "「谢谢，不麻烦您了」",
+          "delta": {
+            "health": -1,
+            "popularity": 1,
+            "prestige": 0,
+            "favor": 0,
+            "risk": 0
+          },
+          "npcAffect": {
+            "chen": 2
+          }
+        }
+      ],
+      "id": "w1d2_afternoon"
+    },
+    {
+      "day": 2,
+      "phase": "evening",
+      "title": "加班时刻",
+      "description": "晚上九点，办公室里只剩下你和小王。老赵的工位空着，但烟灰缸里残留的烟头还在散味。小王捂着鼻子，烦躁地盯着屏幕上的bug。",
+      "choices": [
+        {
+          "id": "w1d2_eve_help",
+          "text": "走过去：「我来帮你看看」",
+          "delta": {
+            "health": -1,
+            "popularity": 8,
+            "prestige": 3,
+            "favor": 2,
+            "risk": 0
+          },
+          "npcAffect": {
+            "wang": 18
+          },
+          "butterflyFlag": "helped_wang_coding"
+        },
+        {
+          "id": "w1d2_eve_open_window",
+          "text": "打开窗户：「透透气，思路会清晰些」",
+          "delta": {
+            "health": -1,
+            "popularity": 5,
+            "prestige": 1,
+            "favor": 0,
+            "risk": 0
+          },
+          "npcAffect": {
+            "wang": 12
+          },
+          "butterflyFlag": "wang_open_window"
+        },
+        {
+          "id": "w1d2_eve_ignore",
+          "text": "装作没注意，继续工作",
+          "delta": {
+            "health": -1,
+            "popularity": -3,
+            "prestige": 0,
+            "favor": 0,
+            "risk": 0
+          },
+          "npcAffect": {
+            "wang": -4
+          }
+        }
+      ],
+      "id": "w1d2_evening"
+    },
+    {
+      "day": 3,
+      "phase": "morning",
+      "title": "晨会的烟雾",
+      "description": "每周晨会，李总坐在主位。她点燃一支烟，咳嗽着开始讲话。没有人敢说什么。",
+      "choices": [
+        {
+          "id": "w1d3_gift",
+          "text": "会后，悄悄给李总放了一盒润喉糖",
+          "delta": {
+            "health": -1,
+            "popularity": 4,
+            "prestige": 1,
+            "favor": 7,
+            "risk": -2
+          },
+          "npcAffect": {
+            "li": 15
+          },
+          "butterflyFlag": "li_ginger_candy"
+        },
+        {
+          "id": "w1d3_speak",
+          "text": "「李总，会议室是不是该禁烟？」",
+          "delta": {
+            "health": -2,
+            "popularity": -5,
+            "prestige": 6,
+            "favor": -8,
+            "risk": 12
+          },
+          "npcAffect": {
+            "wang": -3,
+            "chen": -5,
+            "li": -10
+          },
+          "butterflyFlag": "public_confrontation"
+        },
+        {
+          "id": "w1d3_silent",
+          "text": "低下头，假装记笔记",
+          "delta": {
+            "health": -1,
+            "popularity": 1,
+            "prestige": -2,
+            "favor": 0,
+            "risk": 0
+          }
+        }
+      ],
+      "id": "w1d3_morning"
+    },
+    {
+      "day": 3,
+      "phase": "noon",
+      "title": "吸烟区的老面孔",
+      "description": "加班到八点，你去天台透气。吸烟区里聚着五六个人——老赵、老刘、还有几个面熟的同事。他们看到你，谈话声停了下来。",
+      "choices": [
+        {
+          "id": "w1d3_no_turn_away",
+          "text": "转身下楼，不打扰他们",
+          "delta": {
+            "health": -1,
+            "popularity": -2,
+            "prestige": -2,
+            "favor": 0,
+            "risk": 0
+          },
+          "butterflyFlag": "smokers_circle_avoided"
+        },
+        {
+          "id": "w1d3_no_join",
+          "text": "走过去，站在他们旁边看风景",
+          "delta": {
+            "health": -2,
+            "popularity": 5,
+            "prestige": 1,
+            "favor": 0,
+            "risk": 2
+          },
+          "butterflyFlag": "stood_with_smokers"
+        },
+        {
+          "id": "w1d3_no_cough",
+          "text": "故意咳嗽几声，然后离开",
+          "delta": {
+            "health": 0,
+            "popularity": -5,
+            "prestige": 2,
+            "favor": 0,
+            "risk": 4
+          },
+          "butterflyFlag": "passive_aggressive_cough"
+        }
+      ],
+      "id": "w1d3_noon"
+    },
+    {
+      "day": 3,
+      "phase": "afternoon",
+      "title": "老赵的挑衅",
+      "description": "食堂里，老赵端着饭盘径直坐到你对面的空位。「新来的，听说你下午去了天台？」他笑着，但眼里没有笑意。旁边的老刘也落了座。",
+      "choices": [
+        {
+          "id": "w1d3_honest",
+          "text": "「是，我去透透气」",
+          "delta": {
+            "health": 0,
+            "popularity": 2,
+            "prestige": 1,
+            "favor": 0,
+            "risk": 3
+          }
+        },
+        {
+          "id": "w1d3_joke",
+          "text": "「看来天台是个很受欢迎的地方」",
+          "delta": {
+            "health": 0,
+            "popularity": 6,
+            "prestige": 1,
+            "favor": 1,
+            "risk": 1
+          },
+          "butterflyFlag": "zhao_joke_response"
+        },
+        {
+          "id": "w1d3_firm",
+          "text": "「我希望那里以后不用来抽烟，而是看风景」",
+          "delta": {
+            "health": -2,
+            "popularity": -10,
+            "prestige": 4,
+            "favor": -2,
+            "risk": 8
+          },
+          "npcAffect": {
+            "wang": 4,
+            "chen": 3
+          },
+          "butterflyFlag": "open_challenge_zhao"
+        }
+      ],
+      "id": "w1d3_afternoon"
+    },
+    {
+      "day": 4,
+      "phase": "morning",
+      "title": "打印机旁的对话",
+      "description": "在打印机旁，你遇到了一位看起来温和的中年女同事。她主动开口：「你是新来的小林吧？我是市场部的大刘。听说你对烟味意见挺大？」",
+      "choices": [
+        {
+          "id": "w1d4_mo_confirm",
+          "text": "「二手烟确实对大家都不好」",
+          "delta": {
+            "health": 0,
+            "popularity": 0,
+            "prestige": 2,
+            "favor": 0,
+            "risk": 4
+          },
+          "butterflyFlag": "liu_sales_aware"
+        },
+        {
+          "id": "w1d4_mo_deflect",
+          "text": "「没有没有，只是个人身体问题」",
+          "delta": {
+            "health": -1,
+            "popularity": 3,
+            "prestige": -2,
+            "favor": 1,
+            "risk": -3
+          }
+        },
+        {
+          "id": "w1d4_mo_ask",
+          "text": "「大刘姐，你怎么看这事？」她摇摇头：「老问题了，但你愿意试试也挺好。」",
+          "delta": {
+            "health": -1,
+            "popularity": 5,
+            "prestige": 1,
+            "favor": 2,
+            "risk": 0
+          },
+          "butterflyFlag": "ask_liu_opinion"
+        }
+      ],
+      "id": "w1d4_morning"
+    },
+    {
+      "day": 4,
+      "phase": "noon",
+      "title": "办公室的烟味举报",
+      "description": "物业在公告栏贴了一张通知：「近日接到办公区吸烟投诉，请各位同事自觉遵守。」老赵站在公告栏前，看完后冷笑了一声。",
+      "choices": [
+        {
+          "id": "w1d4_claim",
+          "text": "「是我投诉的」",
+          "delta": {
+            "health": -1,
+            "popularity": -12,
+            "prestige": 6,
+            "favor": 0,
+            "risk": 10
+          },
+          "butterflyFlag": "claimed_report"
+        },
+        {
+          "id": "w1d4_quiet",
+          "text": "沉默走过，不表态",
+          "delta": {
+            "health": -1,
+            "popularity": -1,
+            "prestige": -3,
+            "favor": 0,
+            "risk": -2
+          }
+        },
+        {
+          "id": "w1d4_pretend",
+          "text": "「早该管管了，不知道是谁干的」",
+          "delta": {
+            "health": -1,
+            "popularity": 4,
+            "prestige": -5,
+            "favor": 0,
+            "risk": -1
+          },
+          "butterflyFlag": "pretended_ignorant"
+        }
+      ],
+      "id": "w1d4_noon"
+    },
+    {
+      "day": 4,
+      "phase": "evening",
+      "title": "小王的困境",
+      "description": "小王端着饭盒坐到你旁边，脸色不太好。「赵哥今天找我了，问我是不是跟你一伙的。」他看起来有些紧张。",
+      "choices": [
+        {
+          "id": "w1d4_protect",
+          "text": "「你以后别公开跟我站一起，保护好自己」",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": 3,
+            "favor": 1,
+            "risk": 0
+          },
+          "npcAffect": {
+            "wang": 15
+          },
+          "butterflyFlag": "protected_wang"
+        },
+        {
+          "id": "w1d4_alliance",
+          "text": "「告诉他，我们一起推动的是公司的健康」",
+          "delta": {
+            "health": -1,
+            "popularity": -4,
+            "prestige": 4,
+            "favor": 0,
+            "risk": 5
+          },
+          "npcAffect": {
+            "wang": 12,
+            "chen": -2
+          },
+          "butterflyFlag": "wang_public_ally"
+        },
+        {
+          "id": "w1d4_distance",
+          "text": "「不用理他，做好自己的事就行」",
+          "delta": {
+            "health": 0,
+            "popularity": 1,
+            "prestige": 1,
+            "favor": 0,
+            "risk": 2
+          },
+          "npcAffect": {
+            "wang": 4
+          }
+        }
+      ],
+      "id": "w1d4_evening"
+    },
+    {
+      "day": 5,
+      "phase": "morning",
+      "title": "通风口的烟蒂",
+      "description": "你在工位闻到一股焦味。循着味道找去，发现空调通风口旁边塞了七八个烟蒂。有人故意把烟头藏在通风口——全办公室的空气都从这里循环。",
+      "choices": [
+        {
+          "id": "w1d5_photo",
+          "text": "拍照存档，发给陈哥",
+          "delta": {
+            "health": 0,
+            "popularity": -3,
+            "prestige": 3,
+            "favor": 2,
+            "risk": 4
+          },
+          "npcAffect": {
+            "chen": 12
+          },
+          "butterflyFlag": "vent_photo_evidence"
+        },
+        {
+          "id": "w1d5_clean",
+          "text": "默默清理干净，没有告诉任何人",
+          "delta": {
+            "health": -1,
+            "popularity": 1,
+            "prestige": 0,
+            "favor": 0,
+            "risk": 0
+          },
+          "butterflyFlag": "vent_cleaned_silently",
+          "propReward": "fan"
+        },
+        {
+          "id": "w1d5_confront",
+          "text": "拿着烟蒂去老赵工位：「你干的？」",
+          "delta": {
+            "health": -1,
+            "popularity": -15,
+            "prestige": 3,
+            "favor": -4,
+            "risk": 14
+          },
+          "butterflyFlag": "vent_confrontation"
+        }
+      ],
+      "id": "w1d5_morning"
+    },
+    {
+      "day": 5,
+      "phase": "noon",
+      "title": "陈哥的试探",
+      "description": "陈哥约你一起吃午饭。「小林，听说你想搞禁烟？」他的语气听不出情绪。",
+      "choices": [
+        {
+          "id": "w1d5_honest",
+          "text": "「是的，我觉得可以试试」",
+          "delta": {
+            "health": -1,
+            "popularity": -2,
+            "prestige": 3,
+            "favor": 1,
+            "risk": 5
+          },
+          "npcAffect": {
+            "chen": 4
+          },
+          "butterflyFlag": "chen_knows_intent"
+        },
+        {
+          "id": "w1d5_cautious",
+          "text": "「只是觉得二手烟确实不太好」",
+          "delta": {
+            "health": 0,
+            "popularity": 3,
+            "prestige": 1,
+            "favor": 2,
+            "risk": 2
+          },
+          "npcAffect": {
+            "chen": 8
+          },
+          "butterflyFlag": "chen_cautious_support"
+        },
+        {
+          "id": "w1d5_deny",
+          "text": "「没有的事，我只是身体不太好」",
+          "delta": {
+            "health": -1,
+            "popularity": -1,
+            "prestige": -2,
+            "favor": 0,
+            "risk": -2
+          },
+          "npcAffect": {
+            "chen": -3
+          }
+        }
+      ],
+      "id": "w1d5_noon"
+    },
+    {
+      "day": 5,
+      "phase": "afternoon",
+      "title": "老刘的警告",
+      "description": "老刘趁没人注意，走到你工位旁，压低声音：「小林，赵哥在公司干了十五年。你一个新来的，别给自己找不痛快。」",
+      "choices": [
+        {
+          "id": "w1d5_thanks",
+          "text": "「谢谢刘哥提醒」——不置可否",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": 1,
+            "favor": 1,
+            "risk": 0
+          },
+          "butterflyFlag": "liu_warned_received"
+        },
+        {
+          "id": "w1d5_pushback",
+          "text": "「十五年不代表就可以伤害别人的肺」",
+          "delta": {
+            "health": -2,
+            "popularity": -8,
+            "prestige": 6,
+            "favor": -1,
+            "risk": 10
+          },
+          "npcAffect": {
+            "wang": 8
+          },
+          "butterflyFlag": "liu_pushback"
+        },
+        {
+          "id": "w1d5_thank_warn",
+          "text": "「刘哥，他自己怎么想是他的事。谢谢你提醒」",
+          "delta": {
+            "health": 0,
+            "popularity": 5,
+            "prestige": 1,
+            "favor": 1,
+            "risk": 2
+          },
+          "butterflyFlag": "liu_thanked_gracefully"
+        }
+      ],
+      "id": "w1d5_afternoon"
+    },
+    {
+      "day": 6,
+      "phase": "evening",
+      "title": "周末·后花园",
+      "description": "周六夜晚，阳台上的栀子花在月光下格外安静。这是你为数不多能真正放松的时刻。",
+      "choices": [
+        {
+          "id": "w1d6_prune",
+          "text": "修剪枝叶，浇水",
+          "delta": {
+            "health": 0,
+            "popularity": 0,
+            "prestige": 0,
+            "favor": 0,
+            "risk": -3
+          },
+          "butterflyFlag": "gardened_week1"
+        },
+        {
+          "id": "w1d6_letters",
+          "text": "给同事们写几封问候便签",
+          "delta": {
+            "health": 0,
+            "popularity": 10,
+            "prestige": 1,
+            "favor": 3,
+            "risk": 0
+          },
+          "butterflyFlag": "wrote_letters"
+        },
+        {
+          "id": "w1d6_draft",
+          "text": "整理禁烟提案的初稿",
+          "delta": {
+            "health": -2,
+            "popularity": 0,
+            "prestige": 8,
+            "favor": 1,
+            "risk": 2
+          },
+          "butterflyFlag": "proposal_started"
+        }
+      ],
+      "id": "w1d6_evening"
+    },
+    {
+      "day": 7,
+      "phase": "morning",
+      "title": "周日的朋友圈",
+      "description": "周日早上，你刷到老赵的朋友圈：「有些新来的人就是事儿多，待不下去了自然会走。」配图是一根点燃的烟。底下好几个同事点了赞。",
+      "choices": [
+        {
+          "id": "w1d7_ignore_social",
+          "text": "无视，不去对号入座",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": 1,
+            "favor": 0,
+            "risk": 0
+          },
+          "butterflyFlag": "ignored_zhao_post"
+        },
+        {
+          "id": "w1d7_comment",
+          "text": "评论：「赵哥，有事可以当面聊」",
+          "delta": {
+            "health": -1,
+            "popularity": -8,
+            "prestige": 4,
+            "favor": 0,
+            "risk": 8
+          },
+          "butterflyFlag": "zhao_public_reply"
+        },
+        {
+          "id": "w1d7_screenshot",
+          "text": "截图发给陈哥",
+          "delta": {
+            "health": 0,
+            "popularity": -3,
+            "prestige": 1,
+            "favor": 1,
+            "risk": 3
+          },
+          "npcAffect": {
+            "chen": 10
+          },
+          "butterflyFlag": "screenshot_to_hr"
+        }
+      ],
+      "id": "w1d7_morning"
+    },
+    {
+      "day": 7,
+      "phase": "evening",
+      "title": "第一周结束",
+      "description": "周日夜晚，你坐在窗前。回想这一周——老赵的敌意、老刘的警告、陈哥的试探、小王的犹豫……你有些疲惫，但也更清楚自己想要什么。",
+      "choices": [
+        {
+          "id": "w1d7_reflect",
+          "text": "复盘得失，坚定路线",
+          "delta": {
+            "health": 0,
+            "popularity": 2,
+            "prestige": 1,
+            "favor": 2,
+            "risk": -2
+          },
+          "butterflyFlag": "week1_reflected"
+        },
+        {
+          "id": "w1d7_rest",
+          "text": "好好休息，顺其自然",
+          "delta": {
+            "health": 0,
+            "popularity": 0,
+            "prestige": -1,
+            "favor": 0,
+            "risk": 0
+          }
+        },
+        {
+          "id": "w1d7_prepare",
+          "text": "整理一周的观察笔记，为提案做准备",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": 5,
+            "favor": 1,
+            "risk": 1
+          },
+          "butterflyFlag": "week1_notes_prepared"
+        }
+      ],
+      "id": "w1d7_evening"
+    }
+  ]
+}

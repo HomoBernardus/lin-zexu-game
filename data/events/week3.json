@@ -1,0 +1,789 @@
+{
+  "week": 3,
+  "title": "转折期",
+  "events": [
+    {
+      "id": "w3d1_morning",
+      "day": 15,
+      "phase": "morning",
+      "title": "流言四起",
+      "description": "不知道谁传的，说你要搞禁烟运动。路过茶水间时，你听到有人在议论。",
+      "choices": [
+        {
+          "id": "w3d1_clarify",
+          "text": "走进茶水间：「有什么想问的，可以直接找我」",
+          "delta": {
+            "health": 0,
+            "popularity": 4,
+            "prestige": 5,
+            "favor": -1,
+            "risk": 5
+          },
+          "butterflyFlag": "public_clarified"
+        },
+        {
+          "id": "w3d1_ignore",
+          "text": "假装没听到，走开",
+          "delta": {
+            "health": -1,
+            "popularity": -2,
+            "prestige": -3,
+            "favor": 0,
+            "risk": 0
+          }
+        },
+        {
+          "id": "w3d1_ally",
+          "text": "找陈哥商量对策",
+          "delta": {
+            "health": -1,
+            "popularity": 3,
+            "prestige": 3,
+            "favor": 2,
+            "risk": -3
+          },
+          "npcAffect": {
+            "chen": 9
+          },
+          "butterflyFlag": "rumor_chen_consult"
+        }
+      ]
+    },
+    {
+      "id": "w3d1_afternoon",
+      "day": 15,
+      "phase": "afternoon",
+      "title": "刺头盟友",
+      "description": "下午，一个短发的年轻女程序员径直走到你工位前。「你就是小林？」她双手撑在你桌面上，眼睛发亮，「我叫小周，技术部前端。听说你要搞禁烟？算我一个。」她的语速很快，像是憋了很久。",
+      "choices": [
+        {
+          "id": "w3d1_zhou_welcome",
+          "text": "「太好了，我正需要盟友」",
+          "delta": {
+            "health": 0,
+            "popularity": 3,
+            "prestige": 4,
+            "favor": 0,
+            "risk": 3
+          },
+          "npcAffect": {
+            "zhou": 15
+          },
+          "butterflyFlag": "zhou_allied"
+        },
+        {
+          "id": "w3d1_zhou_caution",
+          "text": "「谢谢你。但这事风险不小，你想清楚了吗？」",
+          "delta": {
+            "health": -1,
+            "popularity": 1,
+            "prestige": 2,
+            "favor": 2,
+            "risk": -2
+          },
+          "npcAffect": {
+            "zhou": 8
+          },
+          "butterflyFlag": "zhou_warned_day1"
+        },
+        {
+          "id": "w3d1_zhou_decline",
+          "text": "「我一个人就行，不想连累别人」",
+          "delta": {
+            "health": -1,
+            "popularity": -3,
+            "prestige": 1,
+            "favor": 0,
+            "risk": -1
+          },
+          "npcAffect": {
+            "zhou": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "w3d2_morning",
+      "day": 16,
+      "phase": "morning",
+      "title": "小周的方式",
+      "description": "第二天一早，你发现公司每层楼的公告栏上都贴了一张打印的A4纸——「二手烟每年导致多少死亡你知道吗？」落款没有名字，但用了等宽字体。小周坐在工位上，冲你眨了眨眼。",
+      "choices": [
+        {
+          "id": "w3d2_zhou_praise",
+          "text": "走过去：「干得漂亮，但下次先跟我商量」",
+          "delta": {
+            "health": 0,
+            "popularity": -5,
+            "prestige": 5,
+            "favor": -1,
+            "risk": 8
+          },
+          "npcAffect": {
+            "zhou": 12
+          },
+          "butterflyFlag": "zhou_posters_approved"
+        },
+        {
+          "id": "w3d2_zhou_tone_down",
+          "text": "走过去：「内容没问题，但匿名贴海报不是办法。先撕下来，我们走正道」",
+          "delta": {
+            "health": -1,
+            "popularity": 4,
+            "prestige": 1,
+            "favor": 3,
+            "risk": -3
+          },
+          "npcAffect": {
+            "zhou": 5,
+            "chen": 5
+          },
+          "butterflyFlag": "zhou_restrained_early"
+        },
+        {
+          "id": "w3d2_zhou_distance",
+          "text": "假装没看到，回到工位",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": -2,
+            "favor": 1,
+            "risk": -2
+          },
+          "npcAffect": {
+            "zhou": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "w3d2_noon",
+      "day": 16,
+      "phase": "noon",
+      "title": "陈哥的法条",
+      "conditions": {
+        "requiresFlag": [
+          "chen_friendly",
+          "chen_sharing_past"
+        ]
+      },
+      "description": "陈哥约你在阳台见面，递给你一份文件：「这是职业病防治法的相关条款。如果你真要推，这个用得着。」",
+      "choices": [
+        {
+          "id": "w3d2_thank",
+          "text": "「陈哥，谢谢你」",
+          "delta": {
+            "health": -1,
+            "popularity": 8,
+            "prestige": 3,
+            "favor": 2,
+            "risk": -2
+          },
+          "npcAffect": {
+            "chen": 15
+          },
+          "butterflyFlag": "chen_law_aid"
+        },
+        {
+          "id": "w3d2_study",
+          "text": "「我回去好好研究一下」",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": 4,
+            "favor": 0,
+            "risk": 0
+          },
+          "npcAffect": {
+            "chen": 8
+          },
+          "butterflyFlag": "studied_law"
+        }
+      ]
+    },
+    {
+      "id": "w3d3_morning",
+      "day": 17,
+      "phase": "morning",
+      "title": "HR的警告",
+      "description": "陈哥把你拉到会议室，关上门。「小林，那个小周是你的人？」他把手机递给你——有人拍了她贴海报的照片发到了公司群里。「张总看到了，让我查是谁。我帮你压了，但你得管管她。」",
+      "choices": [
+        {
+          "id": "w3d3_zhou_defend",
+          "text": "「陈哥，她说的是事实。匿名举报抽烟的人没事，贴个健康提醒反而有问题？」",
+          "delta": {
+            "health": -2,
+            "popularity": -3,
+            "prestige": 5,
+            "favor": -3,
+            "risk": 10
+          },
+          "npcAffect": {
+            "chen": -8,
+            "zhou": 8
+          },
+          "butterflyFlag": "defended_zhou_to_hr"
+        },
+        {
+          "id": "w3d3_zhou_handle",
+          "text": "「我去跟她谈谈。谢谢陈哥帮我压下来」",
+          "delta": {
+            "health": -1,
+            "popularity": 3,
+            "prestige": 2,
+            "favor": 4,
+            "risk": -3
+          },
+          "npcAffect": {
+            "chen": 10
+          },
+          "butterflyFlag": "promised_handle_zhou"
+        },
+        {
+          "id": "w3d3_zhou_throw",
+          "text": "「我不认识她。她做什么跟我没关系」",
+          "delta": {
+            "health": -1,
+            "popularity": -8,
+            "prestige": -8,
+            "favor": 2,
+            "risk": -5
+          },
+          "npcAffect": {
+            "zhou": -15,
+            "chen": -3
+          },
+          "butterflyFlag": "disowned_zhou"
+        }
+      ]
+    },
+    {
+      "id": "w3d3_afternoon",
+      "day": 17,
+      "phase": "afternoon",
+      "title": "压力测试",
+      "description": "有人在周报里匿名投诉你「影响团队氛围」。李总让你解释一下。",
+      "choices": [
+        {
+          "id": "w3d3_explain",
+          "text": "「我理解有人不适应，但禁烟是对大家负责」",
+          "delta": {
+            "health": -2,
+            "popularity": 2,
+            "prestige": 3,
+            "favor": 3,
+            "risk": 8
+          },
+          "npcAffect": {
+            "li": 8
+          }
+        },
+        {
+          "id": "w3d3_apologize",
+          "text": "「抱歉，我以后会更注意方式」",
+          "delta": {
+            "health": -1,
+            "popularity": 6,
+            "prestige": -4,
+            "favor": 5,
+            "risk": -5
+          },
+          "npcAffect": {
+            "chen": 6
+          }
+        },
+        {
+          "id": "w3d3_fight",
+          "text": "「投诉我的人敢当面说吗？」",
+          "delta": {
+            "health": -2,
+            "popularity": -10,
+            "prestige": 5,
+            "favor": -8,
+            "risk": 15
+          },
+          "butterflyFlag": "fight_back"
+        }
+      ]
+    },
+    {
+      "id": "w3d4_morning",
+      "day": 18,
+      "phase": "morning",
+      "title": "天台上的对峙",
+      "description": "小周气冲冲地找到你：「刚才老赵在工位上抽烟，我让他灭掉。他说'你算什么东西'。」她的手指在发抖。这时候老赵从走廊那头走过来，看见你们俩，冷笑了一声：「哟，刺头联盟啊？」",
+      "choices": [
+        {
+          "id": "w3d4_zhou_fight",
+          "text": "挡在小周前面：「赵哥，冲我来。她只是说了实话」",
+          "delta": {
+            "health": -2,
+            "popularity": -8,
+            "prestige": 9,
+            "favor": -2,
+            "risk": 10
+          },
+          "npcAffect": {
+            "zhou": 18
+          },
+          "butterflyFlag": "stood_up_for_zhou"
+        },
+        {
+          "id": "w3d4_zhou_calm",
+          "text": "拉住小周：「别在这里。不值得跟他吵。」带她离开",
+          "delta": {
+            "health": -1,
+            "popularity": 3,
+            "prestige": 3,
+            "favor": 2,
+            "risk": -2
+          },
+          "npcAffect": {
+            "zhou": 5,
+            "chen": 4
+          },
+          "butterflyFlag": "deescalated_zhou"
+        },
+        {
+          "id": "w3d4_zhou_letgo",
+          "text": "站在原地，让小周自己处理",
+          "delta": {
+            "health": 0,
+            "popularity": -3,
+            "prestige": -4,
+            "favor": 0,
+            "risk": 5
+          },
+          "npcAffect": {
+            "zhou": -8
+          }
+        }
+      ]
+    },
+    {
+      "id": "w3d4_evening",
+      "day": 18,
+      "phase": "evening",
+      "title": "小王的决定",
+      "conditions": {
+        "requiresFlag": [
+          "wang_app_created"
+        ]
+      },
+      "description": "小王给你发了一条消息：「哥/姐，那个工具我优化好了。要不要试试看？」",
+      "choices": [
+        {
+          "id": "w3d4_yes",
+          "text": "「好，但只用来统计数据，不公开」",
+          "delta": {
+            "health": 0,
+            "popularity": 5,
+            "prestige": 6,
+            "favor": 0,
+            "risk": 10
+          },
+          "npcAffect": {
+            "wang": 12
+          },
+          "butterflyFlag": "app_deployed_private"
+        },
+        {
+          "id": "w3d4_no",
+          "text": "「先不用，我担心风险」",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": 1,
+            "favor": 0,
+            "risk": -5
+          },
+          "npcAffect": {
+            "wang": -2
+          }
+        },
+        {
+          "id": "w3d4_trust",
+          "text": "「我相信你的判断，你来决定」",
+          "delta": {
+            "health": 0,
+            "popularity": 8,
+            "prestige": 3,
+            "favor": 0,
+            "risk": 5
+          },
+          "npcAffect": {
+            "wang": 18
+          },
+          "butterflyFlag": "wang_decision_trust"
+        }
+      ]
+    },
+    {
+      "id": "w3d5_morning",
+      "day": 19,
+      "phase": "morning",
+      "title": "李总咳嗽",
+      "description": "晨会上，李总咳嗽得比往常更厉害。会议结束后，她叫住了你。",
+      "choices": [
+        {
+          "id": "w3d5_care",
+          "text": "「李总，您要不要去医院看看？」",
+          "delta": {
+            "health": -1,
+            "popularity": 4,
+            "prestige": 2,
+            "favor": 10,
+            "risk": 0
+          },
+          "npcAffect": {
+            "li": 18,
+            "wang": -5
+          },
+          "butterflyFlag": "li_cared"
+        },
+        {
+          "id": "w3d5_opportunity",
+          "text": "「李总，这就是为什么我建议禁烟」",
+          "delta": {
+            "health": 0,
+            "popularity": -2,
+            "prestige": 6,
+            "favor": 2,
+            "risk": 6
+          },
+          "npcAffect": {
+            "li": 9
+          },
+          "butterflyFlag": "li_health_warning"
+        },
+        {
+          "id": "w3d5_silent",
+          "text": "「没事就好」",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": -2,
+            "favor": 1,
+            "risk": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "w3d5_afternoon",
+      "day": 19,
+      "phase": "afternoon",
+      "title": "最后的通牒",
+      "description": "张总把陈哥和你叫到办公室。「那个姓周的程序员，我已经忍了很久了。贴海报、顶撞老员工、煽动对立。小林，我知道她跟你走得近。你管不住她，我就替你管。」陈哥在桌下轻轻踢了你一脚。",
+      "choices": [
+        {
+          "id": "w3d5_zhou_vouch",
+          "text": "「张总，小周的方式确实不对。但她说的问题是真的。给我三天，我让她道歉」",
+          "delta": {
+            "health": -2,
+            "popularity": 2,
+            "prestige": 4,
+            "favor": 4,
+            "risk": 8
+          },
+          "npcAffect": {
+            "zhou": 10
+          },
+          "butterflyFlag": "vouched_for_zhou"
+        },
+        {
+          "id": "w3d5_zhou_sacrifice",
+          "text": "「张总，公司规定很清楚。该怎么处理就怎么处理」",
+          "delta": {
+            "health": -1,
+            "popularity": -15,
+            "prestige": -8,
+            "favor": 5,
+            "risk": -10
+          },
+          "npcAffect": {
+            "zhou": -20,
+            "chen": -5
+          },
+          "butterflyFlag": "sacrificed_zhou"
+        },
+        {
+          "id": "w3d5_zhou_deflect_li",
+          "text": "「张总，李总最近咳嗽很厉害，二手烟对她的影响真的很大。小周的方式我不认同，但她不是为了自己」",
+          "delta": {
+            "health": 0,
+            "popularity": 5,
+            "prestige": 6,
+            "favor": 3,
+            "risk": 6
+          },
+          "npcAffect": {
+            "zhou": 5,
+            "li": 8
+          },
+          "butterflyFlag": "deflected_to_li_health"
+        }
+      ]
+    },
+    {
+      "id": "w3d6_morning",
+      "day": 20,
+      "phase": "morning",
+      "title": "会前抉择",
+      "description": "全员大会前，小周找到你：「下午的会，我也要发言。我要让所有人知道，办公室二手烟是违法职业病防治法的。」她的手里攥着一叠打印的法规条文。「你拦不住我。」",
+      "choices": [
+        {
+          "id": "w3d6_zhou_let_speak",
+          "text": "「好。但你答应我，只讲法规，不攻击任何人」",
+          "delta": {
+            "health": 0,
+            "popularity": -5,
+            "prestige": 6,
+            "favor": 0,
+            "risk": 8
+          },
+          "npcAffect": {
+            "zhou": 10
+          },
+          "butterflyFlag": "zhou_speak_controlled"
+        },
+        {
+          "id": "w3d6_zhou_block",
+          "text": "「小周。如果你相信我，就让我来说。你发言只会让张总更快开除你」",
+          "delta": {
+            "health": -1,
+            "popularity": 3,
+            "prestige": 3,
+            "favor": 2,
+            "risk": -3
+          },
+          "npcAffect": {
+            "zhou": -3
+          },
+          "butterflyFlag": "zhou_blocked_from_speaking"
+        },
+        {
+          "id": "w3d6_zhou_free",
+          "text": "「你是对的。想说就说吧，我支持你」",
+          "delta": {
+            "health": -2,
+            "popularity": -10,
+            "prestige": 3,
+            "favor": -2,
+            "risk": 15
+          },
+          "npcAffect": {
+            "zhou": 15
+          },
+          "butterflyFlag": "zhou_unleashed"
+        }
+      ]
+    },
+    {
+      "id": "w3d6_afternoon",
+      "day": 20,
+      "phase": "afternoon",
+      "title": "公开会议",
+      "description": "全员大会上，老员工张哥突然站起来：「小林，你说的禁烟，问过大伙儿的意见吗？我们这个年纪的人，抽了半辈子，你说禁就禁？」会议室里一阵窃窃私语，所有人的目光都转向你。",
+      "choices": [
+        {
+          "id": "w3d6_firm",
+          "text": "「张哥，我不是针对谁。二手烟会伤害所有人，包括你工位旁怀孕的小刘」",
+          "delta": {
+            "health": 0,
+            "popularity": -15,
+            "prestige": 9,
+            "favor": 3,
+            "risk": 8
+          },
+          "butterflyFlag": "public_debate_won"
+        },
+        {
+          "id": "w3d6_backdown",
+          "text": "「大家别误会，我只是提出一个可以讨论的方向」",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": -12,
+            "favor": -3,
+            "risk": -5
+          },
+          "npcAffect": {
+            "wang": -4,
+            "chen": -5
+          }
+        },
+        {
+          "id": "w3d6_rage",
+          "text": "「这不是征求意见，是为大家的健康负责！不同意的人可以辞职」",
+          "delta": {
+            "health": -3,
+            "popularity": -25,
+            "prestige": -10,
+            "favor": -10,
+            "risk": 20
+          },
+          "npcAffect": {
+            "wang": -6,
+            "chen": -8,
+            "li": -5
+          },
+          "butterflyFlag": "public_outburst"
+        }
+      ]
+    },
+    {
+      "id": "w3d6_evening",
+      "day": 20,
+      "phase": "evening",
+      "title": "小周的命运",
+      "description": "散会后，张总在会议室门口拦住了小周。所有人都看着。「周小姐，你的试用期提前结束了。明天不用来了。」小周愣在原地，手里的法规条文散落一地。她看向你。",
+      "choices": [
+        {
+          "id": "w3d6_save_zhou",
+          "text": "「张总，小周的所有行为都是我指使的。要罚罚我」——这可能会让你也被开除",
+          "delta": {
+            "health": -5,
+            "popularity": 15,
+            "prestige": 14,
+            "favor": -15,
+            "risk": 25
+          },
+          "npcAffect": {
+            "zhou": 25
+          },
+          "butterflyFlag": "zhou_saved"
+        },
+        {
+          "id": "w3d6_save_zhou_clever",
+          "text": "「张总，刚才会上大家听到了，二手烟确实伤害了孕妇和病人。小周是在维护公司女同事的健康权益。开除她，传出去对公司不好」",
+          "delta": {
+            "health": 0,
+            "popularity": 8,
+            "prestige": 10,
+            "favor": 2,
+            "risk": 12
+          },
+          "npcAffect": {
+            "zhou": 20,
+            "chen": -12,
+            "li": -8
+          },
+          "butterflyFlag": "zhou_saved_smart"
+        },
+        {
+          "id": "w3d6_abandon_zhou",
+          "text": "站在原地，没有开口。有人拍了你一下，但你已经错过了开口的时机",
+          "delta": {
+            "health": -1,
+            "popularity": -25,
+            "prestige": -20,
+            "favor": 5,
+            "risk": -8
+          },
+          "npcAffect": {
+            "zhou": -30,
+            "wang": -5,
+            "chen": -6
+          },
+          "butterflyFlag": "zhou_fired"
+        }
+      ]
+    },
+    {
+      "id": "w3d7_morning",
+      "day": 21,
+      "phase": "morning",
+      "title": "匿名举报信",
+      "description": "一封匿名举报信发到了全公司邮箱，列举了你推进禁烟过程中的「不当行为」——深夜加班影响他人、未经同意收集吸烟数据、煽动新员工对抗老员工。邮件末尾写着：「这个人比烟更危险。」",
+      "choices": [
+        {
+          "id": "w3d7_reply_all",
+          "text": "回复全员：「我对每一项指控负责。如果有任何一条属实，我立刻辞职」",
+          "delta": {
+            "health": -4,
+            "popularity": 8,
+            "prestige": 10,
+            "favor": 0,
+            "risk": 12
+          },
+          "butterflyFlag": "reply_all_challenge"
+        },
+        {
+          "id": "w3d7_quiet",
+          "text": "沉默不回应，让舆论自行发酵",
+          "delta": {
+            "health": 0,
+            "popularity": -18,
+            "prestige": -10,
+            "favor": -5,
+            "risk": 2
+          },
+          "npcAffect": {
+            "wang": -3,
+            "li": -4
+          }
+        },
+        {
+          "id": "w3d7_find_source",
+          "text": "找陈哥帮忙查发件人，同时私下逐个找同事安抚",
+          "delta": {
+            "health": -3,
+            "popularity": -5,
+            "prestige": 2,
+            "favor": 5,
+            "risk": 5
+          },
+          "npcAffect": {
+            "chen": 15
+          },
+          "butterflyFlag": "source_hunt"
+        }
+      ]
+    },
+    {
+      "id": "w3d7_afternoon",
+      "day": 21,
+      "phase": "afternoon",
+      "title": "余波",
+      "description": "小周的事像一块石头砸进了池塘。茶水间里，你听到有人在议论：「听说小林看着小周被开除了……」「他连自己人都护不住，还想护全公司？」",
+      "choices": [
+        {
+          "id": "w3d7_zhou_aftermath_own",
+          "text": "走进去：「小周的事是我没处理好。但禁烟这件事，我不会放弃」",
+          "delta": {
+            "health": -1,
+            "popularity": 4,
+            "prestige": 4,
+            "favor": -2,
+            "risk": 5
+          },
+          "butterflyFlag": "owned_zhou_aftermath"
+        },
+        {
+          "id": "w3d7_zhou_aftermath_quiet",
+          "text": "转身离开。有些话，传就传吧",
+          "delta": {
+            "health": -1,
+            "popularity": -5,
+            "prestige": -5,
+            "favor": 0,
+            "risk": -2
+          }
+        },
+        {
+          "id": "w3d7_zhou_aftermath_fight",
+          "text": "「小周被开除是因为她说出了真相。如果公司连真话都容不下，那我也没什么好说的」",
+          "delta": {
+            "health": -2,
+            "popularity": -10,
+            "prestige": 8,
+            "favor": -8,
+            "risk": 16
+          },
+          "butterflyFlag": "public_defense_of_zhou"
+        }
+      ]
+    }
+  ]
+}

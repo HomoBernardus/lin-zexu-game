@@ -1,0 +1,602 @@
+{
+  "week": 4,
+  "title": "冲刺期",
+  "events": [
+    {
+      "id": "w4d1_morning",
+      "day": 22,
+      "phase": "morning",
+      "title": "最后一周",
+      "description": "最后一周了。年会就在眼前。你深吸一口气，空气里还是烟味，但你知道，有些事情已经在改变了。",
+      "choices": [
+        {
+          "id": "w4d1_confidence",
+          "text": "相信自己，也相信这一个月积累的力量",
+          "delta": {
+            "health": -1,
+            "popularity": 3,
+            "prestige": 3,
+            "favor": 2,
+            "risk": 0
+          },
+          "butterflyFlag": "final_week_confidence"
+        },
+        {
+          "id": "w4d1_anxious",
+          "text": "紧张，但还是决定走到最后",
+          "delta": {
+            "health": -3,
+            "popularity": 2,
+            "prestige": 1,
+            "favor": 1,
+            "risk": 2
+          }
+        },
+        {
+          "id": "w4d1_determined",
+          "text": "不管结果如何，我问心无愧",
+          "delta": {
+            "health": 0,
+            "popularity": 0,
+            "prestige": 4,
+            "favor": 0,
+            "risk": 5
+          },
+          "butterflyFlag": "li_endorsement"
+        }
+      ]
+    },
+    {
+      "id": "w4d1_afternoon",
+      "day": 22,
+      "phase": "afternoon",
+      "title": "老赵的转变",
+      "description": "下午，你发现老赵的工位烟灰缸不见了。他桌上多了一盒尼古丁贴片。看到你在看，他别过脸去：「看什么看，医生说我肺有结节。」",
+      "choices": [
+        {
+          "id": "w4d1_zhao_encourage",
+          "text": "「赵哥，祝你戒烟顺利。需要帮忙随时找我」",
+          "delta": {
+            "health": -1,
+            "popularity": 8,
+            "prestige": 1,
+            "favor": 2,
+            "risk": -2
+          },
+          "butterflyFlag": "zhao_encouraged"
+        },
+        {
+          "id": "w4d1_zhao_silent",
+          "text": "点点头，没有多说什么",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": 1,
+            "favor": 0,
+            "risk": 0
+          }
+        },
+        {
+          "id": "w4d1_zhao_snark",
+          "text": "「早该如此了」",
+          "delta": {
+            "health": 0,
+            "popularity": -5,
+            "prestige": -2,
+            "favor": -2,
+            "risk": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "w4d2_noon",
+      "day": 23,
+      "phase": "noon",
+      "title": "三个人的午餐",
+      "conditions": {
+        "requiresFlag": [
+          "wang_coffee_invite",
+          "chen_law_aid",
+          "li_data_meeting"
+        ]
+      },
+      "description": "小王、陈哥和李总竟然坐在了一起。他们叫你也过来：「小林，坐下聊聊。」",
+      "choices": [
+        {
+          "id": "w4d2_joint",
+          "text": "坐下，听他们说什么",
+          "delta": {
+            "health": -1,
+            "popularity": 10,
+            "prestige": 5,
+            "favor": 8,
+            "risk": 0
+          },
+          "npcAffect": {
+            "wang": 12,
+            "chen": 12,
+            "li": 12
+          },
+          "butterflyFlag": "three_alliance_form"
+        }
+      ]
+    },
+    {
+      "id": "w4d2_evening",
+      "day": 23,
+      "phase": "evening",
+      "title": "下班后的天台",
+      "description": "你独自去了天台。吸烟区已经没什么人了——老赵在戒烟，老刘来得也少了。但空气里还是残留着淡淡的烟味。你看着楼下，想着这个月发生的一切。",
+      "choices": [
+        {
+          "id": "w4d2_reflect",
+          "text": "回想每一个选择，复盘得失",
+          "delta": {
+            "health": 0,
+            "popularity": 1,
+            "prestige": 1,
+            "favor": 1,
+            "risk": -1
+          },
+          "butterflyFlag": "w4_rooftop_reflect"
+        },
+        {
+          "id": "w4d2_call_family",
+          "text": "给家里打个电话",
+          "delta": {
+            "health": 0,
+            "popularity": 0,
+            "prestige": 0,
+            "favor": 0,
+            "risk": 0
+          }
+        },
+        {
+          "id": "w4d2_rehearse",
+          "text": "对着空气练习年会的发言",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": 5,
+            "favor": 0,
+            "risk": 2
+          },
+          "butterflyFlag": "rehearsed_speech"
+        }
+      ]
+    },
+    {
+      "id": "w4d3_afternoon",
+      "day": 24,
+      "phase": "afternoon",
+      "title": "最后的阻力",
+      "description": "有人在你工位上放了一包烟，上面贴了张纸条：「管好你自己。」",
+      "choices": [
+        {
+          "id": "w4d3_ignore",
+          "text": "默默收起来，丢进垃圾桶",
+          "delta": {
+            "health": -1,
+            "popularity": 3,
+            "prestige": 1,
+            "favor": 0,
+            "risk": -2
+          },
+          "butterflyFlag": "final_resistance_ignored"
+        },
+        {
+          "id": "w4d3_report",
+          "text": "报告给陈哥，要求调查",
+          "delta": {
+            "health": 0,
+            "popularity": -3,
+            "prestige": 3,
+            "favor": -1,
+            "risk": 10
+          },
+          "npcAffect": {
+            "chen": 4
+          }
+        },
+        {
+          "id": "w4d3_confront",
+          "text": "在群里发：「谁放的，可以当面说」",
+          "delta": {
+            "health": -2,
+            "popularity": -8,
+            "prestige": 5,
+            "favor": -5,
+            "risk": 15
+          },
+          "butterflyFlag": "final_confrontation"
+        }
+      ]
+    },
+    {
+      "id": "w4d3_evening",
+      "day": 24,
+      "phase": "evening",
+      "title": "李总的通知",
+      "description": "下班前，李总走到你工位旁。「小林，后天跟我去见一个客户。王总，是公司最大的合作伙伴。」她顿了顿，「他是老烟枪。这个场合，你管住自己。我没在跟你商量。」",
+      "choices": [
+        {
+          "id": "w4d3_agree_diplomatic",
+          "text": "「李总放心，我知道什么场合该说什么」",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": 1,
+            "favor": 4,
+            "risk": -2
+          },
+          "npcAffect": {
+            "li": 5
+          }
+        },
+        {
+          "id": "w4d3_agree_stand",
+          "text": "「如果他抽烟，我不能假装没看见」",
+          "delta": {
+            "health": 0,
+            "popularity": -3,
+            "prestige": 3,
+            "favor": -2,
+            "risk": 8
+          },
+          "npcAffect": {
+            "li": -3
+          },
+          "butterflyFlag": "told_li_wont_back_down"
+        },
+        {
+          "id": "w4d3_agree_silent",
+          "text": "沉默点头",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": -2,
+            "favor": 1,
+            "risk": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "w4d4_evening",
+      "day": 25,
+      "phase": "evening",
+      "title": "提案定稿",
+      "description": "你终于完成了禁烟提案的最终稿。窗外万家灯火，你知道，所有的付出都浓缩在这份文件里。",
+      "choices": [
+        {
+          "id": "w4d4_finalize",
+          "text": "一字一句再读一遍",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": 6,
+            "favor": 3,
+            "risk": 0
+          },
+          "butterflyFlag": "proposal_finalized"
+        },
+        {
+          "id": "w4d4_rest",
+          "text": "放下笔，好好休息一晚",
+          "delta": {
+            "health": 0,
+            "popularity": 2,
+            "prestige": 0,
+            "favor": 0,
+            "risk": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "w4d5_morning",
+      "day": 26,
+      "phase": "morning",
+      "title": "赴约之前",
+      "description": "去客户公司的车上，李总一边开车一边说：「王总是我爸那辈的生意伙伴。没有他，公司撑不过疫情那几年。」她从手套箱里拿出一包软中华，看了一眼，又放回去了。「所以今天，不管他抽多少，你都给我忍着。」",
+      "choices": [
+        {
+          "id": "w4d5_prep_diplomatic",
+          "text": "「李总，我懂。我不会让你难做」",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": 0,
+            "favor": 6,
+            "risk": -3
+          },
+          "npcAffect": {
+            "li": 8
+          }
+        },
+        {
+          "id": "w4d5_prep_question",
+          "text": "「李总，你是不是也觉得应该禁烟，只是没办法？」",
+          "delta": {
+            "health": 0,
+            "popularity": 0,
+            "prestige": 3,
+            "favor": -1,
+            "risk": 5
+          },
+          "npcAffect": {
+            "li": 3
+          },
+          "butterflyFlag": "asked_li_deep_question"
+        },
+        {
+          "id": "w4d5_prep_agree_silent",
+          "text": "看着窗外，没有说话",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": -3,
+            "favor": 1,
+            "risk": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "w4d5_afternoon",
+      "day": 26,
+      "phase": "afternoon",
+      "title": "烟雾中的谈判",
+      "description": "王总的办公室很大，烟味比公司吸烟区还浓。他是个五十多岁的中年男人，烟灰缸里堆着七八个烟头。落座后，他递了一支烟给李总，李总接过来，点燃了。「王总，这是小林，我们公司最有想法的年轻人。」王总吐出一口烟，眯着眼睛看你：「就你要禁烟啊？小伙子/姑娘，胆量不小。」他笑了，但眼睛没笑。",
+      "choices": [
+        {
+          "id": "w4d5_client_data",
+          "text": "「王总，不是胆量。二手烟导致的肺癌比例，去年又上升了。这不是观点，是数据」",
+          "delta": {
+            "health": -2,
+            "popularity": -10,
+            "prestige": 12,
+            "favor": -5,
+            "risk": 15
+          },
+          "npcAffect": {
+            "li": -8
+          },
+          "butterflyFlag": "stood_ground_with_client"
+        },
+        {
+          "id": "w4d5_client_diplomatic",
+          "text": "「王总，今天主要是向您请教。公司的事，我们内部慢慢聊」",
+          "delta": {
+            "health": -1,
+            "popularity": 3,
+            "prestige": 0,
+            "favor": 8,
+            "risk": -3
+          },
+          "npcAffect": {
+            "li": 12
+          },
+          "butterflyFlag": "diplomatic_with_client"
+        },
+        {
+          "id": "w4d5_client_cough",
+          "text": "被烟呛得咳嗽了几声，但没有说话",
+          "delta": {
+            "health": -1,
+            "popularity": -5,
+            "prestige": -3,
+            "favor": 0,
+            "risk": 0
+          }
+        },
+        {
+          "id": "w4d5_client_bold",
+          "text": "「王总，您说笑了。我来是想告诉您，如果贵公司也能考虑禁烟，员工的医保开支能降至少15%」",
+          "delta": {
+            "health": -2,
+            "popularity": -8,
+            "prestige": 14,
+            "favor": -8,
+            "risk": 18
+          },
+          "npcAffect": {
+            "li": -12
+          },
+          "butterflyFlag": "pitched_to_client"
+        }
+      ]
+    },
+    {
+      "id": "w4d5_evening",
+      "day": 26,
+      "phase": "evening",
+      "title": "散场之后",
+      "description": "从王总那里出来，天已经黑了。李总在停车场的路灯下站了很久，又点了一支烟。这次她没抽，只是看着烟慢慢燃尽。「你知道吗，王总刚才给我发消息，说你是个有意思的年轻人。」她终于看向你，「只是他没说，这是好事还是坏事。」",
+      "choices": [
+        {
+          "id": "w4d5_aftermath_care",
+          "text": "「李总，你别抽了。我看着你这样，心里难受」",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": 0,
+            "favor": 10,
+            "risk": 0
+          },
+          "npcAffect": {
+            "li": 15
+          },
+          "butterflyFlag": "li_cared_deeply"
+        },
+        {
+          "id": "w4d5_aftermath_firm",
+          "text": "「李总，今天的场合我忍了。但年会那天，我不会再忍」",
+          "delta": {
+            "health": 0,
+            "popularity": 0,
+            "prestige": 6,
+            "favor": -3,
+            "risk": 6
+          },
+          "npcAffect": {
+            "li": 5
+          },
+          "butterflyFlag": "set_boundary_with_li"
+        },
+        {
+          "id": "w4d5_aftermath_silent",
+          "text": "站在她旁边，一起看着烟燃尽",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": 1,
+            "favor": 3,
+            "risk": -1
+          },
+          "npcAffect": {
+            "li": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "w4d6_morning",
+      "day": 27,
+      "phase": "morning",
+      "title": "战前动员",
+      "description": "离年会还有两天。小王在楼梯间找到你：「哥/姐，陈哥让我告诉你，他已经跟法务确认了——只要提案获得半数以上支持，公司就必须成立专项委员会讨论。」他看起来紧张但兴奋，「我们真的能做到，对吧？」",
+      "choices": [
+        {
+          "id": "w4d6_rally_yes",
+          "text": "「我们已经在做了。不管结果如何，这一个月没白费」",
+          "delta": {
+            "health": -1,
+            "popularity": 8,
+            "prestige": 4,
+            "favor": 3,
+            "risk": 0
+          },
+          "npcAffect": {
+            "wang": 15
+          },
+          "butterflyFlag": "rallied_wang_final"
+        },
+        {
+          "id": "w4d6_rally_cautious",
+          "text": "「再检查一遍所有数据和材料，不要有任何漏洞」",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": 5,
+            "favor": 1,
+            "risk": 0
+          },
+          "butterflyFlag": "final_prep_double_check"
+        },
+        {
+          "id": "w4d6_rally_scared",
+          "text": "「说实话，我很紧张」",
+          "delta": {
+            "health": -1,
+            "popularity": 5,
+            "prestige": -1,
+            "favor": 1,
+            "risk": -2
+          },
+          "npcAffect": {
+            "wang": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "w4d6_afternoon",
+      "day": 27,
+      "phase": "afternoon",
+      "title": "老王的态度",
+      "description": "老刘在走廊拦住了你：「小林，赵哥让我跟你说句话。」你停下来。他压低声音：「我们几个老家伙商量过了——年会那天，我们不反对。」他顿了顿，「赵哥的肺结节，医生说是良性的。但他吓坏了。他说，也许你一直在做的事，是对的。」",
+      "choices": [
+        {
+          "id": "w4d6_graceful_win",
+          "text": "「刘哥，谢谢你们。这不是谁输谁赢的事」",
+          "delta": {
+            "health": -1,
+            "popularity": 12,
+            "prestige": 5,
+            "favor": 3,
+            "risk": -3
+          },
+          "butterflyFlag": "graceful_with_veterans"
+        },
+        {
+          "id": "w4d6_rub_it_in",
+          "text": "「早该听我的」",
+          "delta": {
+            "health": 0,
+            "popularity": -8,
+            "prestige": -3,
+            "favor": -3,
+            "risk": 3
+          }
+        },
+        {
+          "id": "w4d6_quiet_nod",
+          "text": "默默握了握老刘的手",
+          "delta": {
+            "health": -1,
+            "popularity": 5,
+            "prestige": 1,
+            "favor": 2,
+            "risk": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "w4d7_evening",
+      "day": 28,
+      "phase": "evening",
+      "title": "年会前夜",
+      "description": "明天就是年会了。你坐在阳台上，栀子花已经开了好几朵，白得像宣纸上的月光。你翻着这一个月来的笔记——从第一天电梯里的烟味，到今天老刘的那句话。你忽然觉得，不管明天结果如何，有些东西已经不一样了。",
+      "choices": [
+        {
+          "id": "w4d7_prepare_speech",
+          "text": "写下明天的发言稿，每个字都反复推敲",
+          "delta": {
+            "health": -3,
+            "popularity": 0,
+            "prestige": 8,
+            "favor": 2,
+            "risk": 2
+          },
+          "butterflyFlag": "speech_prepared"
+        },
+        {
+          "id": "w4d7_rest_eve",
+          "text": "关上灯，早早休息。明天需要最好的状态",
+          "delta": {
+            "health": 0,
+            "popularity": 2,
+            "prestige": 0,
+            "favor": 0,
+            "risk": -3
+          }
+        },
+        {
+          "id": "w4d7_toast",
+          "text": "给自己倒了一杯茶，对着夜空敬了一杯",
+          "delta": {
+            "health": 0,
+            "popularity": 5,
+            "prestige": 3,
+            "favor": 3,
+            "risk": -1
+          },
+          "butterflyFlag": "eve_toast"
+        }
+      ]
+    }
+  ]
+}

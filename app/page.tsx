@@ -1,65 +1,142 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect, useState } from 'react';
+import { GameEvent } from '@/types/game';
+import { useGameStore } from '@/hooks/useGameState';
+import { determineEnding } from '@/lib/gameLogic';
+import Dashboard from '@/components/Dashboard';
+import EventCard from '@/components/EventCard';
+import Garden from '@/components/Garden';
+import NPCStatus from '@/components/NPCStatus';
+import PropPanel from '@/components/PropPanel';
+import EndingScreen from '@/components/EndingScreen';
+import SplashScreen from '@/components/SplashScreen';
+import { week1Events, week2Events, week3Events, week4Events } from '@/data/events';
+
+const allEvents = [...week1Events, ...week2Events, ...week3Events, ...week4Events];
 
 export default function Home() {
+  const { day, completedEvents, activeFlags, gameOver, ending, nextDay, initializeGame, resetGame } = useGameStore();
+  const [gameStarted, setGameStarted] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
+  const [pageVisible, setPageVisible] = useState(false);
+
+  useEffect(() => {
+    const hasSave = localStorage.getItem('linzexu-game-storage');
+    if (!hasSave) initializeGame();
+    setGameStarted(true);
+  }, []);
+
+  const eventIsAvailable = (e: GameEvent) => {
+    const cond = (e as unknown as Record<string, unknown>).conditions as { requiresFlag?: string[] } | undefined;
+    if (cond?.requiresFlag) return cond.requiresFlag.every(f => activeFlags.includes(f));
+    return true;
+  };
+
+  const dayEvents = allEvents.filter(e => e.day === day && eventIsAvailable(e));
+  const currentEvent = dayEvents.find(e => !completedEvents.includes(e.id)) ?? null;
+
+  useEffect(() => {
+    if (day >= 29 && !gameOver) {
+      const store = useGameStore.getState();
+      const endingType = determineEnding(store);
+      useGameStore.setState({ ending: endingType, gameOver: true });
+    }
+  }, [day, gameOver]);
+
+  const handleEventComplete = () => {
+    const state = useGameStore.getState();
+    const remaining = allEvents.filter(
+      e => e.day === state.day && eventIsAvailable(e) && !state.completedEvents.includes(e.id)
+    );
+    if (remaining.length === 0) state.nextDay();
+  };
+
+  const handleSkipDay = () => nextDay();
+
+  const handleRestart = () => {
+    resetGame();
+    setGameStarted(false);
+    setShowSplash(true);
+    setPageVisible(false);
+    setTimeout(() => {
+      setGameStarted(true);
+    }, 100);
+  };
+
+  if (gameOver || ending) {
+    return <EndingScreen onRestart={handleRestart} />;
+  }
+
+  if (!gameStarted) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#F5F0EA]">
+        <div className="text-center">
+          <div className="w-12 h-12 mx-auto rounded-full border-2 border-[#EBE5DD] border-t-[#8B7355] animate-spin mb-4" />
+          <p className="text-sm text-[#9B8B7A]">加载中...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (showSplash) {
+    return <SplashScreen onStart={() => { setShowSplash(false); setTimeout(() => setPageVisible(true), 50); }} />;
+  }
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className={`game-container transition-opacity duration-500 ${pageVisible ? 'opacity-100' : 'opacity-0'}`}>
+      {/* 标题 */}
+      <header className="mb-6 md:mb-8">
+        <h1 className="text-xl md:text-2xl font-serif text-[#2D2420] tracking-wider text-center">
+          林则徐 · 都市销烟录
+        </h1>
+        <p className="text-xs text-[#9B8B7A] mt-1.5 tracking-widest text-center">
+          30天 · 决定一家公司的命运
+        </p>
+      </header>
+
+      {/* 主体布局 */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5">
+        {/* 左侧面板 */}
+        <aside className="lg:col-span-1 space-y-4">
+          <div className="animate-fade-in">
+            <Dashboard />
+          </div>
+          <div className="animate-fade-in-delayed grid grid-cols-2 lg:grid-cols-1 gap-4">
+            <NPCStatus />
+            <Garden />
+          </div>
+          <div className="animate-fade-in-delayed">
+            <PropPanel />
+          </div>
+        </aside>
+
+        {/* 右侧：事件卡片 */}
+        <section className="lg:col-span-2">
+          <div className="animate-fade-in">
+            {currentEvent ? (
+              <EventCard key={currentEvent.id} event={currentEvent} onComplete={handleEventComplete} />
+            ) : (
+              <div className="event-card text-center py-10 md:py-16">
+                <p className="text-[#2D2420] font-serif text-xl md:text-2xl mb-2">今日无事，岁月静好</p>
+                <p className="text-sm text-[#9B8B7A] mb-8">
+                  除了工作，没什么特别的事发生。休息一下也是必要的。
+                </p>
+                <button onClick={handleSkipDay} className="btn-primary">
+                  下一天
+                </button>
+              </div>
+            )}
+          </div>
+        </section>
+      </div>
+
+      {/* 底部 */}
+      <footer className="mt-8 md:mt-10 text-center">
+        <p className="text-xs text-[#C4B8A8] tracking-widest">
+          刚者易折，柔者难立。唯有刚柔并济，方能销烟革新。
+        </p>
+      </footer>
+    </main>
   );
 }

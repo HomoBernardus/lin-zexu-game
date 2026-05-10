@@ -1,0 +1,1089 @@
+{
+  "week": 2,
+  "title": "冲突期",
+  "events": [
+    {
+      "id": "w2d1_morning",
+      "day": 8,
+      "phase": "morning",
+      "title": "周一·新关键词",
+      "description": "新的一周开始。空气中有什么不一样了。",
+      "choices": [
+        {
+          "id": "w2d1_observe",
+          "text": "先观察这周的氛围",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": 1,
+            "favor": 1,
+            "risk": -1
+          }
+        },
+        {
+          "id": "w2d1_aggressive",
+          "text": "趁着新气象，主动出击",
+          "delta": {
+            "health": -1,
+            "popularity": -3,
+            "prestige": 4,
+            "favor": -2,
+            "risk": 10
+          },
+          "butterflyFlag": "aggressive_week2"
+        },
+        {
+          "id": "w2d1_cautious",
+          "text": "低调行事，保存实力",
+          "delta": {
+            "health": -1,
+            "popularity": 4,
+            "prestige": -1,
+            "favor": 0,
+            "risk": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "w2d1_afternoon",
+      "day": 8,
+      "phase": "afternoon",
+      "title": "陈哥的试探",
+      "description": "陈哥路过你工位，停了一下。「小林，上周的事我听说了。老赵在公司干了十五年，你一个新来的，别跟他正面冲突。」他的语气不像是批评，倒像是担心。",
+      "choices": [
+        {
+          "id": "w2d1_hr_backoff",
+          "text": "「谢谢陈哥，我会有分寸的」",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": 1,
+            "favor": 2,
+            "risk": -2
+          },
+          "npcAffect": {
+            "chen": 4
+          }
+        },
+        {
+          "id": "w2d1_hr_challenge",
+          "text": "「陈哥，你是HR，工位抽烟本来就违规。你为什么不管？」",
+          "delta": {
+            "health": -1,
+            "popularity": -5,
+            "prestige": 4,
+            "favor": -2,
+            "risk": 6
+          },
+          "npcAffect": {
+            "chen": -10
+          },
+          "butterflyFlag": "challenged_chen_hr"
+        },
+        {
+          "id": "w2d1_hr_neutral",
+          "text": "「我理解。但有些事总得有人做」",
+          "delta": {
+            "health": 0,
+            "popularity": 0,
+            "prestige": 2,
+            "favor": 1,
+            "risk": 3
+          },
+          "npcAffect": {
+            "chen": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "w2d1_evening",
+      "day": 8,
+      "phase": "evening",
+      "title": "加班夜的烟味",
+      "description": "晚上九点，办公室只剩你一个人改方案。李总办公室的灯也亮着，烟味从她门缝里一缕缕飘出来，比你工位旁的还浓。她又在加班，也在抽烟。你隔着半条走廊，听到她一阵剧烈的咳嗽——连续咳了快一分钟才停下来。灯还亮着，烟味还在飘。",
+      "choices": [
+        {
+          "id": "w2d1_eve_ignore",
+          "text": "默默戴上口罩，继续改方案。不多管闲事",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": -1,
+            "favor": 0,
+            "risk": 0
+          }
+        },
+        {
+          "id": "w2d1_eve_knock",
+          "text": "敲门进去：「李总，这么晚了还抽？您刚才咳了快一分钟，走廊都听到了」",
+          "delta": {
+            "health": -1,
+            "popularity": -5,
+            "prestige": 4,
+            "favor": -3,
+            "risk": 8
+          },
+          "npcAffect": {
+            "li": -12
+          },
+          "butterflyFlag": "challenged_li_latenight"
+        },
+        {
+          "id": "w2d1_eve_tea",
+          "text": "泡了一杯陈皮茶，放在她办公室门口，附了张便签：「李总，这个对嗓子好。早点休息」",
+          "delta": {
+            "health": 0,
+            "popularity": 4,
+            "prestige": 1,
+            "favor": 3,
+            "risk": -1
+          },
+          "npcAffect": {
+            "li": 6
+          },
+          "butterflyFlag": "li_tea_latenight"
+        }
+      ]
+    },
+    {
+      "id": "w2d2_morning",
+      "day": 9,
+      "phase": "morning",
+      "title": "晨会上的对峙",
+      "description": "晨会上，李总坐在主位，习惯性地点燃了一支烟。会议室不大，烟雾很快弥漫开来。坐在角落新来的实习生小李皱着眉，用手扇了扇，被旁边的老职员用眼神制止了。几个抽烟的同事也相继点上了。会议桌上很快就烟雾缭绕了。",
+      "choices": [
+        {
+          "id": "w2d2_meeting_confront",
+          "text": "「李总，会议室里有新同事，还有不抽烟的同事。能不能先把烟灭了，会议结束再抽？」",
+          "delta": {
+            "health": 0,
+            "popularity": -4,
+            "prestige": 3,
+            "favor": -2,
+            "risk": 6
+          },
+          "npcAffect": {
+            "li": -8,
+            "wang": 5
+          },
+          "butterflyFlag": "confronted_li_meeting"
+        },
+        {
+          "id": "w2d2_meeting_private",
+          "text": "会后私下找到李总：「李总，今天会议室里有实习生，可能不太习惯烟味。以后正式场合是不是可以注意一下？」",
+          "delta": {
+            "health": -1,
+            "popularity": 1,
+            "prestige": 1,
+            "favor": 3,
+            "risk": -2
+          },
+          "npcAffect": {
+            "li": 4
+          },
+          "butterflyFlag": "li_meeting_private_talk"
+        },
+        {
+          "id": "w2d2_meeting_silent",
+          "text": "低头假装在看笔记本，记下了会议室里每一个皱眉的人",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": 0,
+            "favor": 0,
+            "risk": 0
+          },
+          "butterflyFlag": "meeting_observed_silently"
+        }
+      ]
+    },
+    {
+      "id": "w2d2_noon",
+      "day": 9,
+      "phase": "noon",
+      "title": "小王求助",
+      "description": "午休时，小王走到你工位旁边，表情有些疲惫：「老赵又在工位抽烟了，我跟他提了一句，他说我多管闲事……你觉得我该怎么办？」",
+      "choices": [
+        {
+          "id": "w2d2_refuse_gentle",
+          "text": "「别硬碰。喝咖啡吗？我请你，咱们聊聊」",
+          "delta": {
+            "health": -1,
+            "popularity": 7,
+            "prestige": 1,
+            "favor": 1,
+            "risk": 0
+          },
+          "npcAffect": {
+            "wang": 15
+          },
+          "butterflyFlag": "wang_coffee_invite"
+        },
+        {
+          "id": "w2d2_refuse_firm",
+          "text": "「你已经做得很好了。下次我跟你一起说」",
+          "delta": {
+            "health": 0,
+            "popularity": 3,
+            "prestige": 3,
+            "favor": 0,
+            "risk": 2
+          },
+          "npcAffect": {
+            "wang": 12
+          },
+          "butterflyFlag": "wang_talk_session"
+        },
+        {
+          "id": "w2d2_reject",
+          "text": "「别想了，忍忍就过去了」",
+          "delta": {
+            "health": -1,
+            "popularity": -4,
+            "prestige": 0,
+            "favor": 0,
+            "risk": 0
+          },
+          "npcAffect": {
+            "wang": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "w2d2_evening",
+      "day": 9,
+      "phase": "evening",
+      "title": "烟味再起",
+      "description": "加班到八点，老赵和几个老同事又聚在楼梯间抽烟。烟味顺着门缝飘进来，小王的工位正好在下风口。你看见小王把口罩戴上了。",
+      "choices": [
+        {
+          "id": "w2d2_open_door",
+          "text": "推开门：「楼道禁止吸烟，这是公司规定」",
+          "delta": {
+            "health": 0,
+            "popularity": -10,
+            "prestige": 4,
+            "favor": -1,
+            "risk": 8
+          },
+          "butterflyFlag": "stairwell_confront_w2d2"
+        },
+        {
+          "id": "w2d2_report_now",
+          "text": "拍下照片，发给物业",
+          "delta": {
+            "health": 0,
+            "popularity": -5,
+            "prestige": 3,
+            "favor": 0,
+            "risk": 6
+          },
+          "butterflyFlag": "stairwell_photo_w2d2"
+        },
+        {
+          "id": "w2d2_ignore",
+          "text": "帮小王把工位搬到上风口",
+          "delta": {
+            "health": -1,
+            "popularity": 5,
+            "prestige": 1,
+            "favor": 1,
+            "risk": 0
+          },
+          "npcAffect": {
+            "wang": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "w2d3_morning",
+      "day": 10,
+      "phase": "morning",
+      "title": "茶水间的议论",
+      "description": "你端着杯子走到茶水间门口，听见里面两个同事在聊天：「小林最近动静不小啊……」「听说陈哥以前也想禁烟，后来不了了之。HR都搞不定的事，一个新来的折腾什么？」",
+      "choices": [
+        {
+          "id": "w2d3_eavesdrop_enter",
+          "text": "走进去：「陈哥没做成的事，不代表别人也做不成」",
+          "delta": {
+            "health": -2,
+            "popularity": -8,
+            "prestige": 8,
+            "favor": 0,
+            "risk": 6
+          },
+          "npcAffect": {
+            "chen": -15
+          },
+          "butterflyFlag": "dismissed_chen_effort"
+        },
+        {
+          "id": "w2d3_eavesdrop_defend",
+          "text": "走进去：「你们不了解陈哥，他帮了我很多」",
+          "delta": {
+            "health": -1,
+            "popularity": 4,
+            "prestige": 1,
+            "favor": 2,
+            "risk": 0
+          },
+          "npcAffect": {
+            "chen": 10
+          },
+          "butterflyFlag": "defended_chen_public"
+        },
+        {
+          "id": "w2d3_eavesdrop_leave",
+          "text": "默默转身离开，假装没听到",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": -2,
+            "favor": 0,
+            "risk": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "w2d3_afternoon",
+      "day": 10,
+      "phase": "afternoon",
+      "title": "匿名投诉",
+      "description": "公司收到了一封匿名投诉信，举报有人在会议室抽烟。大家都在议论是谁写的。",
+      "choices": [
+        {
+          "id": "w2d3_claim",
+          "text": "主动承认：「是我，但我不匿名」",
+          "delta": {
+            "health": -2,
+            "popularity": -8,
+            "prestige": 10,
+            "favor": -5,
+            "risk": 16
+          },
+          "butterflyFlag": "claimed_complaint",
+          "npcAffect": {
+            "chen": -3,
+            "li": -8
+          }
+        },
+        {
+          "id": "w2d3_silent",
+          "text": "沉默不语，但心里认同",
+          "delta": {
+            "health": 0,
+            "popularity": 2,
+            "prestige": 0,
+            "favor": 0,
+            "risk": 5
+          }
+        },
+        {
+          "id": "w2d3_deflect",
+          "text": "「我觉得可能是其他人」",
+          "delta": {
+            "health": -1,
+            "popularity": -2,
+            "prestige": -4,
+            "favor": 1,
+            "risk": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "w2d3_evening",
+      "day": 10,
+      "phase": "evening",
+      "title": "陈哥的对质",
+      "description": "下班后，陈哥在电梯口拦住你。他的表情比平时严肃：「小林，今天茶水间的事，有人传到我耳朵里了。」他顿了顿，「说我当年没做成，因为我没本事？」",
+      "choices": [
+        {
+          "id": "w2d3_apologize_sincere",
+          "text": "「陈哥，对不起。话赶话说重了。我不该那么讲的」",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": -2,
+            "favor": 2,
+            "risk": -3
+          },
+          "npcAffect": {
+            "chen": 8
+          },
+          "butterflyFlag": "apologized_to_chen"
+        },
+        {
+          "id": "w2d3_double_down",
+          "text": "「那你告诉我，为什么十二年了，吸烟区还在？」",
+          "delta": {
+            "health": -2,
+            "popularity": -5,
+            "prestige": 6,
+            "favor": -2,
+            "risk": 8
+          },
+          "npcAffect": {
+            "chen": -18
+          },
+          "butterflyFlag": "challenged_chen_deeply"
+        },
+        {
+          "id": "w2d3_deflect_topic",
+          "text": "「陈哥，我没说过那种话。有人在传闲话」",
+          "delta": {
+            "health": 0,
+            "popularity": -2,
+            "prestige": -5,
+            "favor": 0,
+            "risk": 3
+          },
+          "npcAffect": {
+            "chen": -8
+          }
+        }
+      ]
+    },
+    {
+      "id": "w2d4_morning",
+      "day": 11,
+      "phase": "morning",
+      "title": "HR的邮件",
+      "description": "一封来自陈哥的邮件发到了你邮箱，抄送了李总：「关于近期禁烟讨论，请各位同事通过HR渠道提交建议，勿在工作时间私下串联。」措辞正式，落款是「人力资源部 陈」。",
+      "choices": [
+        {
+          "id": "w2d4_reply_formal",
+          "text": "回复全员：「收到，我会通过正式渠道提交建议」",
+          "delta": {
+            "health": -1,
+            "popularity": 3,
+            "prestige": 1,
+            "favor": 3,
+            "risk": -5
+          },
+          "npcAffect": {
+            "chen": 8
+          }
+        },
+        {
+          "id": "w2d4_reply_chen",
+          "text": "单独回复陈哥：「你是在拦我，还是在帮我？我需要知道」",
+          "delta": {
+            "health": 0,
+            "popularity": 0,
+            "prestige": 3,
+            "favor": 0,
+            "risk": 6
+          },
+          "npcAffect": {
+            "chen": -10
+          },
+          "butterflyFlag": "questioned_chen_motive"
+        },
+        {
+          "id": "w2d4_go_to_li",
+          "text": "直接去李总办公室，跳过陈哥说明情况",
+          "delta": {
+            "health": -1,
+            "popularity": -3,
+            "prestige": 5,
+            "favor": 2,
+            "risk": 10
+          },
+          "npcAffect": {
+            "chen": -15,
+            "li": 6
+          },
+          "butterflyFlag": "bypassed_chen_to_li"
+        }
+      ]
+    },
+    {
+      "id": "w2d4_noon",
+      "day": 11,
+      "phase": "noon",
+      "title": "餐桌上的反驳",
+      "description": "午餐时间，你端着餐盘走进食堂，看到李总和几个部门经理坐在一起。你端着餐盘在邻桌坐下，听到李总的声音：「烟确实不好，但有些事不是规定能解决的。我在公司这么多年，见过太多一纸空文。不如慢慢来，引导为主。」几个经理频频点头。",
+      "choices": [
+        {
+          "id": "w2d4_lunch_interrupt",
+          "text": "端着餐盘坐过去：「李总，不好意思听到了。如果是钱的问题，我可以现在算一笔账——医保多缴的、病假损失、办公设备折旧被烟熏——去年这些加起来至少是这个数」",
+          "delta": {
+            "health": -1,
+            "popularity": -8,
+            "prestige": 8,
+            "favor": -6,
+            "risk": 12
+          },
+          "npcAffect": {
+            "li": -15
+          },
+          "butterflyFlag": "challenged_li_public_lunch"
+        },
+        {
+          "id": "w2d4_lunch_pursue",
+          "text": "散场后，追上去：「李总，刚才的话我不完全同意。方便的时候，可以给我十分钟吗？」",
+          "delta": {
+            "health": 0,
+            "popularity": -1,
+            "prestige": 3,
+            "favor": 0,
+            "risk": 5
+          },
+          "npcAffect": {
+            "li": -3
+          },
+          "butterflyFlag": "pursued_li_after_lunch"
+        },
+        {
+          "id": "w2d4_lunch_silent",
+          "text": "低头继续吃饭，但心里记下了每一个反对的论点",
+          "delta": {
+            "health": -1,
+            "popularity": 1,
+            "prestige": 1,
+            "favor": 1,
+            "risk": 0
+          },
+          "butterflyFlag": "noted_lunch_arguments"
+        }
+      ]
+    },
+    {
+      "id": "w2d4_evening",
+      "day": 11,
+      "phase": "evening",
+      "title": "雨夜谈话",
+      "description": "加班到很晚，陈哥也没走。办公室很安静，他突然开口：「你知道吗，我以前也想过禁烟这事。」",
+      "choices": [
+        {
+          "id": "w2d4_listen",
+          "text": "「后来呢？」",
+          "delta": {
+            "health": -1,
+            "popularity": 7,
+            "prestige": 1,
+            "favor": 2,
+            "risk": 0
+          },
+          "npcAffect": {
+            "chen": 18,
+            "li": -3
+          },
+          "butterflyFlag": "chen_sharing_past"
+        },
+        {
+          "id": "w2d4_persuade",
+          "text": "「但现在不同了，我们可以一起做」",
+          "delta": {
+            "health": 0,
+            "popularity": 4,
+            "prestige": 5,
+            "favor": 0,
+            "risk": 5
+          },
+          "npcAffect": {
+            "chen": 12
+          },
+          "butterflyFlag": "chen_persuaded"
+        },
+        {
+          "id": "w2d4_avoid",
+          "text": "「嗯…我先回去了」",
+          "delta": {
+            "health": -1,
+            "popularity": -3,
+            "prestige": 0,
+            "favor": 0,
+            "risk": 0
+          },
+          "npcAffect": {
+            "chen": -4
+          }
+        }
+      ]
+    },
+    {
+      "id": "w2d5_morning",
+      "day": 12,
+      "phase": "morning",
+      "title": "李总找你",
+      "description": "李总的秘书通知你，李总让你去办公室一趟。一路上，你在想是为了什么。",
+      "choices": [
+        {
+          "id": "w2d5_data",
+          "text": "带上准备好的禁烟效益分析报告",
+          "delta": {
+            "health": 0,
+            "popularity": 0,
+            "prestige": 8,
+            "favor": 5,
+            "risk": 3
+          },
+          "npcAffect": {
+            "li": 22
+          },
+          "butterflyFlag": "li_data_meeting",
+          "propReward": "watergun"
+        },
+        {
+          "id": "w2d5_tea",
+          "text": "带上一盒润肺茶",
+          "delta": {
+            "health": 0,
+            "popularity": 5,
+            "prestige": 1,
+            "favor": 8,
+            "risk": -2
+          },
+          "npcAffect": {
+            "li": 18
+          },
+          "butterflyFlag": "li_tea_gift"
+        },
+        {
+          "id": "w2d5_nothing",
+          "text": "空手而去，随机应变",
+          "delta": {
+            "health": 0,
+            "popularity": 0,
+            "prestige": -2,
+            "favor": 0,
+            "risk": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "w2d5_afternoon",
+      "day": 12,
+      "phase": "afternoon",
+      "title": "走廊的沉默",
+      "description": "从李总办公室出来，你在走廊碰到了陈哥。他显然看见了你从哪个方向来。他微微点头，但没有停下来。",
+      "choices": [
+        {
+          "id": "w2d5_share_li",
+          "text": "主动走过去：「陈哥，李总问了我的提案，我没绕开你」",
+          "delta": {
+            "health": -1,
+            "popularity": 2,
+            "prestige": 1,
+            "favor": 3,
+            "risk": 0
+          },
+          "npcAffect": {
+            "chen": 8
+          }
+        },
+        {
+          "id": "w2d5_cold_nod",
+          "text": "也点点头，擦肩而过",
+          "delta": {
+            "health": -1,
+            "popularity": -1,
+            "prestige": 1,
+            "favor": 0,
+            "risk": 0
+          },
+          "npcAffect": {
+            "chen": -8
+          }
+        },
+        {
+          "id": "w2d5_call_out",
+          "text": "「陈哥，你要是对我不满，可以直接说出来」",
+          "delta": {
+            "health": -1,
+            "popularity": -6,
+            "prestige": 3,
+            "favor": -2,
+            "risk": 6
+          },
+          "npcAffect": {
+            "chen": -12
+          },
+          "butterflyFlag": "confronted_chen_hallway"
+        }
+      ]
+    },
+    {
+      "id": "w2d5_evening",
+      "day": 12,
+      "phase": "evening",
+      "title": "李总的试探",
+      "description": "下班后，李总的秘书通知你去她办公室。推开门，李总坐在办公桌后，桌上摊着一叠文件——是你的HR档案。她示意你坐下，开门见山：「小林，我查了你入职以来的所有记录。你知不知道，有人在建议我提前终止你的试用期？」她顿了顿，手指轻轻敲着桌上的文件，「说你在搞串联、煽动对立、影响工作秩序。」",
+      "choices": [
+        {
+          "id": "w2d5_li_defensive",
+          "text": "「谁说的？我可以当面解释。我做的每一件事都对得起这份工作」",
+          "delta": {
+            "health": -1,
+            "popularity": -2,
+            "prestige": 3,
+            "favor": -3,
+            "risk": 12
+          },
+          "npcAffect": {
+            "li": -8
+          },
+          "butterflyFlag": "defensive_with_li"
+        },
+        {
+          "id": "w2d5_li_calm",
+          "text": "「李总，我知道会有人说这些。但我更想知道，您自己的想法是什么？」",
+          "delta": {
+            "health": 0,
+            "popularity": 2,
+            "prestige": 4,
+            "favor": 3,
+            "risk": 3
+          },
+          "npcAffect": {
+            "li": 10
+          },
+          "butterflyFlag": "li_honest_talk"
+        },
+        {
+          "id": "w2d5_li_bold",
+          "text": "「李总，如果那些人说对了，您现在就不会单独找我谈了。您让我来，是因为您也不确定——也许我真的在做对的事」",
+          "delta": {
+            "health": 0,
+            "popularity": -5,
+            "prestige": 6,
+            "favor": -4,
+            "risk": 10
+          },
+          "npcAffect": {
+            "li": -10
+          },
+          "butterflyFlag": "li_called_bluff"
+        }
+      ]
+    },
+    {
+      "id": "w2d6_morning",
+      "day": 13,
+      "phase": "morning",
+      "title": "老刘的质问",
+      "description": "老刘趁没人，坐到你的工位旁边。「小林，你知不知道，陈哥因为禁烟的事，在周会上被李总点名了。李总问他，为什么一个新人觉得HR不作为。你不觉得你在害他吗？」",
+      "choices": [
+        {
+          "id": "w2d6_defend_self",
+          "text": "「那是陈哥自己的选择。他从一开始就可以不帮我」",
+          "delta": {
+            "health": 0,
+            "popularity": -3,
+            "prestige": 1,
+            "favor": 0,
+            "risk": 3
+          },
+          "npcAffect": {
+            "chen": -8
+          },
+          "butterflyFlag": "threw_chen_under_bus"
+        },
+        {
+          "id": "w2d6_find_chen",
+          "text": "「我现在就去找陈哥道歉」",
+          "delta": {
+            "health": -1,
+            "popularity": 4,
+            "prestige": 1,
+            "favor": 3,
+            "risk": -2
+          },
+          "npcAffect": {
+            "chen": 10,
+            "li": -3
+          },
+          "butterflyFlag": "sought_chen_reconciliation",
+          "propReward": "gasmask"
+        },
+        {
+          "id": "w2d6_dismiss_liu",
+          "text": "「刘哥，如果你来是想让我收手，不用说了」",
+          "delta": {
+            "health": 0,
+            "popularity": -5,
+            "prestige": 2,
+            "favor": -1,
+            "risk": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "w2d6_noon",
+      "day": 13,
+      "phase": "noon",
+      "title": "小王的秘密",
+      "description": "小王神神秘秘地把你拉到楼梯间：「哥/姐，我写了个小工具，能记录每天谁在工位抽烟…你看有用吗？」",
+      "conditions": {
+        "requiresFlag": [
+          "helped_wang_coding",
+          "wang_coffee_invite"
+        ]
+      },
+      "choices": [
+        {
+          "id": "w2d6_approve",
+          "text": "「太有用了！但注意保护隐私」",
+          "delta": {
+            "health": 0,
+            "popularity": 8,
+            "prestige": 6,
+            "favor": 0,
+            "risk": 5
+          },
+          "npcAffect": {
+            "wang": 22
+          },
+          "butterflyFlag": "wang_app_created"
+        },
+        {
+          "id": "w2d6_caution",
+          "text": "「想法很好，但风险太大，先别用」",
+          "delta": {
+            "health": -1,
+            "popularity": 3,
+            "prestige": 2,
+            "favor": 0,
+            "risk": -3
+          },
+          "npcAffect": {
+            "wang": 8
+          }
+        },
+        {
+          "id": "w2d6_reject",
+          "text": "「别搞这些，太危险了」",
+          "delta": {
+            "health": -1,
+            "popularity": -2,
+            "prestige": -1,
+            "favor": 0,
+            "risk": -5
+          },
+          "npcAffect": {
+            "wang": -5
+          }
+        }
+      ]
+    },
+    {
+      "id": "w2d6_afternoon",
+      "day": 13,
+      "phase": "afternoon",
+      "title": "门外的电话",
+      "description": "路过李总办公室门口，门没关严。你听到她正在打电话，语气难得的激动：「老张，那个姓林的新人确实不懂事，但他说的不全错。」你愣住了——她在跟张总争论，为了你。她的声音低了下去：「我知道我是副总……但公司这十年的烟，你我也是抽过来的。现在有人站出来说，也许不是坏事。」你站在门口，进退两难。",
+      "choices": [
+        {
+          "id": "w2d6_li_enter",
+          "text": "推门进去：「李总，谢谢您。但我自己做的事，我自己扛。不用您替我挡」",
+          "delta": {
+            "health": -2,
+            "popularity": 0,
+            "prestige": 8,
+            "favor": 2,
+            "risk": 10
+          },
+          "npcAffect": {
+            "li": 15
+          },
+          "butterflyFlag": "li_supported_openly"
+        },
+        {
+          "id": "w2d6_li_leave",
+          "text": "悄悄退开，假装没听到。有些话，不是故意听到的就不算数",
+          "delta": {
+            "health": 0,
+            "popularity": 0,
+            "prestige": -2,
+            "favor": 0,
+            "risk": -2
+          },
+          "butterflyFlag": "overheard_li_call"
+        },
+        {
+          "id": "w2d6_li_wait",
+          "text": "在门口等她打完电话，然后敲门进去：「李总，刚才路过听到了一点。我们可以坦诚聊聊吗？」",
+          "delta": {
+            "health": -1,
+            "popularity": 4,
+            "prestige": 2,
+            "favor": 4,
+            "risk": 3
+          },
+          "npcAffect": {
+            "li": 6
+          },
+          "butterflyFlag": "waited_for_li_honest"
+        }
+      ]
+    },
+    {
+      "id": "w2d7_morning",
+      "day": 14,
+      "phase": "morning",
+      "title": "陈哥的便签",
+      "description": "周日早上，你发现工位上贴着一张便签，是陈哥的字迹：「小林，如果你还愿意的话，下周我们一起去找李总。有些话，我一个人说了十年没人听。也许两个人才有分量。——陈」便签的边角被茶水洇湿过。",
+      "choices": [
+        {
+          "id": "w2d7_note_embrace",
+          "text": "去陈哥工位，用力拍了拍他的肩膀",
+          "delta": {
+            "health": -1,
+            "popularity": 10,
+            "prestige": 1,
+            "favor": 3,
+            "risk": -2
+          },
+          "npcAffect": {
+            "chen": 20,
+            "li": -5
+          },
+          "butterflyFlag": "chen_reconciled"
+        },
+        {
+          "id": "w2d7_note_reply",
+          "text": "回一张便签：「好。一起。」贴在原处",
+          "delta": {
+            "health": 0,
+            "popularity": 6,
+            "prestige": 2,
+            "favor": 2,
+            "risk": 0
+          },
+          "npcAffect": {
+            "chen": 12
+          }
+        },
+        {
+          "id": "w2d7_note_ignore",
+          "text": "把便签夹进抽屉。现在不是谈感情的时候",
+          "delta": {
+            "health": 0,
+            "popularity": -6,
+            "prestige": -2,
+            "favor": -2,
+            "risk": 5
+          },
+          "npcAffect": {
+            "chen": -10
+          },
+          "butterflyFlag": "ignored_chen_note"
+        }
+      ]
+    },
+    {
+      "id": "w2d7_noon",
+      "day": 14,
+      "phase": "noon",
+      "title": "群里的文章",
+      "description": "午休时，手机震动。李总在全员群里转发了一篇文章——《企业文化建设，从尊重个体习惯开始》，配文「推荐大家看看」。文章的核心观点你一眼就看穿了：禁烟不如分区，强制不如引导。老赵秒回了一个大拇指，老刘也跟着点了赞。群里一片安静，没人敢接话。",
+      "choices": [
+        {
+          "id": "w2d7_group_reply_all",
+          "text": "在群里回复：「李总，文章很好。但'习惯'的前提是不伤害他人。二手烟不是习惯问题，是健康问题。我整理了一份数据，供大家参考」",
+          "delta": {
+            "health": -2,
+            "popularity": 5,
+            "prestige": 10,
+            "favor": -8,
+            "risk": 15
+          },
+          "npcAffect": {
+            "li": -18,
+            "wang": 8,
+            "chen": 5
+          },
+          "butterflyFlag": "replied_all_against_li"
+        },
+        {
+          "id": "w2d7_group_private",
+          "text": "私聊李总：「文章我看了。但我手里有医保和病假数据想请您过目，关于二手烟对公司成本的真实影响」",
+          "delta": {
+            "health": -1,
+            "popularity": 0,
+            "prestige": 3,
+            "favor": 4,
+            "risk": 3
+          },
+          "npcAffect": {
+            "li": 5
+          },
+          "butterflyFlag": "private_data_to_li"
+        },
+        {
+          "id": "w2d7_group_allies",
+          "text": "不回应。把数据整理好，私下发给陈哥和小王",
+          "delta": {
+            "health": 0,
+            "popularity": 3,
+            "prestige": 0,
+            "favor": 0,
+            "risk": -3
+          },
+          "npcAffect": {
+            "chen": 8,
+            "wang": 6
+          },
+          "butterflyFlag": "shared_data_to_allies"
+        }
+      ]
+    },
+    {
+      "id": "w2d7_evening",
+      "day": 14,
+      "phase": "evening",
+      "title": "周末·栀子花开",
+      "description": "两周了。阳台上的栀子花开了第一朵，洁白如雪。你看着它，心里有种说不清的笃定。",
+      "choices": [
+        {
+          "id": "w2d7_photo",
+          "text": "拍下照片，发朋友圈",
+          "delta": {
+            "health": 0,
+            "popularity": 6,
+            "prestige": 0,
+            "favor": 2,
+            "risk": 0
+          },
+          "butterflyFlag": "garden_bloom_shared"
+        },
+        {
+          "id": "w2d7_meditate",
+          "text": "安静地坐了一下午",
+          "delta": {
+            "health": 0,
+            "popularity": 2,
+            "prestige": 1,
+            "favor": 0,
+            "risk": -2
+          },
+          "butterflyFlag": "week2_meditate"
+        },
+        {
+          "id": "w2d7_prepare",
+          "text": "打电话给陈哥，约他下周聊提案",
+          "delta": {
+            "health": 0,
+            "popularity": 4,
+            "prestige": 3,
+            "favor": 1,
+            "risk": 3
+          },
+          "npcAffect": {
+            "chen": 12
+          },
+          "butterflyFlag": "proposal_chen_meeting"
+        }
+      ]
+    }
+  ]
+}
