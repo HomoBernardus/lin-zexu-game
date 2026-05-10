@@ -63,12 +63,12 @@ export default function NPCStatus() {
           ))}
 
           {/* 小周 · 老赵（非攻略NPC） */}
-          <div className="border-t border-[#F0E8DD] mt-1 pt-2 space-y-0">
+          <div className="border-t border-[#F0E8DD] mt-1 pt-2 flex flex-col gap-y-1">
             {([npcs.zhou, npcs.zhao] as NPC[]).map((npc) => (
               <button
                 key={npc.id}
                 onClick={() => setSelectedNpc(npc)}
-                className="w-full flex items-center justify-between py-1 text-left hover:bg-[#FDF9F5] -mx-1 px-1 rounded-lg transition-colors"
+                className="w-full flex items-center justify-between py-1.5 text-left hover:bg-[#FDF9F5] -mx-1 px-1 rounded-lg transition-colors"
               >
                 <div className="flex items-center gap-2.5 min-w-0">
                   <div
