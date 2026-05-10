@@ -62,40 +62,43 @@ export default function NPCStatus() {
             </button>
           ))}
 
-          {/* 小周 */}
-          <div className="border-t border-[#F0E8DD] mt-1 pt-2">
-            <button
-              onClick={() => setSelectedNpc(npcs.zhou)}
-              className="w-full flex items-center justify-between py-1 text-left hover:bg-[#FDF9F5] -mx-1 px-1 rounded-lg transition-colors"
-            >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold shrink-0"
-                  style={{
-                    backgroundColor: `${npcs.zhou.portraitColor}18`,
-                    color: npcs.zhou.portraitColor,
-                  }}
-                >
-                  {npcs.zhou.name[0]}
-                </div>
-                <div className="min-w-0">
-                  <div className="text-sm font-medium text-[#2D2420] truncate">{npcs.zhou.nickname}</div>
-                  <div className="text-[11px] text-[#9B8B7A] truncate">{npcs.zhou.title}</div>
-                </div>
-              </div>
-              <div className="text-right shrink-0 ml-3">
-                {zhouFired ? (
-                  <div className="text-sm font-semibold text-[#C46B5D]">已离职</div>
-                ) : (
+          {/* 小周 · 老赵（非攻略NPC） */}
+          <div className="border-t border-[#F0E8DD] mt-1 pt-2 space-y-0">
+            {([npcs.zhou, npcs.zhao] as NPC[]).map((npc) => (
+              <button
+                key={npc.id}
+                onClick={() => setSelectedNpc(npc)}
+                className="w-full flex items-center justify-between py-1 text-left hover:bg-[#FDF9F5] -mx-1 px-1 rounded-lg transition-colors"
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
                   <div
-                    className="text-sm font-semibold"
-                    style={{ color: getAffinityColor(false, npcs.zhou.affinity) }}
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold shrink-0"
+                    style={{
+                      backgroundColor: `${npc.portraitColor}18`,
+                      color: npc.portraitColor,
+                    }}
                   >
-                    {npcs.zhou.affinity}
+                    {npc.name[0]}
                   </div>
-                )}
-              </div>
-            </button>
+                  <div className="min-w-0">
+                    <div className="text-sm font-medium text-[#2D2420] truncate">{npc.nickname}</div>
+                    <div className="text-[11px] text-[#9B8B7A] truncate">{npc.title}</div>
+                  </div>
+                </div>
+                <div className="text-right shrink-0 ml-3">
+                  {npc.id === 'zhou' && zhouFired ? (
+                    <div className="text-sm font-semibold text-[#C46B5D]">已离职</div>
+                  ) : (
+                    <div
+                      className="text-sm font-semibold"
+                      style={{ color: getAffinityColor(false, npc.affinity) }}
+                    >
+                      {npc.affinity}
+                    </div>
+                  )}
+                </div>
+              </button>
+            ))}
           </div>
         </div>
       </div>

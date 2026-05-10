@@ -16,7 +16,7 @@ export interface NPCBio {
 }
 
 export interface NPC {
-  id: 'wang' | 'chen' | 'li' | 'zhou';
+  id: 'wang' | 'chen' | 'li' | 'zhou' | 'zhao';
   name: string;
   nickname: string;
   title: string;
@@ -110,6 +110,7 @@ export interface GameState {
     chen: NPC;
     li: NPC;
     zhou: NPC;
+    zhao: NPC;
   };
   weeklyModifier: WeeklyModifier | null;
   modifierRemainingDays: number;

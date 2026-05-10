@@ -83,6 +83,18 @@ const initialNPCs = {
     unlockedEvents: [],
     portraitColor: '#E07B39',
   },
+  zhao: {
+    id: 'zhao' as const,
+    name: '赵',
+    nickname: '老赵',
+    title: '市场部',
+    affinity: 15,
+    prestigePath: 0,
+    popularityPath: 0,
+    isConquered: false,
+    unlockedEvents: [],
+    portraitColor: '#8B6F5E',
+  },
 };
 
 export const useGameStore = create<GameStore>()(
