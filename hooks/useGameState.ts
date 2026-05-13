@@ -401,6 +401,18 @@ export const useGameStore = create<GameStore>()(
         equippedProp: state.equippedProp,
         gardenUsedToday: state.gardenUsedToday,
       }),
+      merge: (persisted, initial) => ({
+        ...initial,
+        ...(persisted as Partial<typeof initial>),
+        npcs: {
+          ...initial.npcs,
+          ...((persisted as { npcs?: typeof initial.npcs } | null)?.npcs ?? {}),
+        },
+        inventory: {
+          ...initial.inventory,
+          ...((persisted as { inventory?: typeof initial.inventory } | null)?.inventory ?? {}),
+        },
+      }),
     }
   )
 );
