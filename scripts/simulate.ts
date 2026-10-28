@@ -16,7 +16,7 @@ import week3Data from '../data/events/week3.json';
 import week4Data from '../data/events/week4.json';
 
 // ====== 配置 ======
-const TOTAL_DAYS = 30;
+const TOTAL_DAYS = 28;
 const TOTAL_RUNS = 2000;
 
 // ====== 加载事件 ======
@@ -37,11 +37,11 @@ const ALL_EVENTS = loadEvents();
 function getHealthDrainBonus(modifier: WeeklyModifier | null): number {
   if (!modifier) return 0;
   switch (modifier.name) {
-    case '梅雨': return 3;
-    case '大检': return 2;
-    case '裁员': return 4;
-    case '酷暑': return 3;
-    case '项目冲刺': return 1;
+    case '梅雨': return 1;
+    case '大检': return 1;
+    case '裁员': return 2;
+    case '酷暑': return 1;
+    case '项目冲刺': return 0;
     default: return 0;
   }
 }
@@ -160,11 +160,11 @@ function generateTestCases(): TestCase[] {
 
 // ====== 初始 NPC ======
 const initialNPCs = {
-  wang: { id: 'wang' as const, name: '王', nickname: '小王', title: '技术部', affinity: 40, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#7CB518' },
-  chen: { id: 'chen' as const, name: '陈', nickname: '陈哥', title: 'HR', affinity: 45, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#FF8C69' },
-  li: { id: 'li' as const, name: '李', nickname: '李总', title: '副总经理', affinity: 35, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#6C91B2' },
-  zhou: { id: 'zhou' as const, name: '周', nickname: '小周', title: '技术部', affinity: 60, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#E07B39' },
-  zhao: { id: 'zhao' as const, name: '赵', nickname: '老赵', title: '市场部', affinity: 15, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#8B6F5E' },
+  wang: { id: 'wang' as const, name: '苏辰', nickname: '小苏', title: '技术部', affinity: 40, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#7CB518' },
+  chen: { id: 'chen' as const, name: '陈文彬', nickname: '陈哥', title: 'HR', affinity: 45, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#FF8C69' },
+  li: { id: 'li' as const, name: '李婉宁', nickname: '李总', title: '副总经理', affinity: 35, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#6C91B2' },
+  zhou: { id: 'zhou' as const, name: '周雨桐', nickname: '小周', title: '技术部', affinity: 60, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#E07B39' },
+  zhao: { id: 'zhao' as const, name: '赵德柱', nickname: '老赵', title: '市场部', affinity: 15, prestigePath: 0, popularityPath: 0, isConquered: false, unlockedEvents: [], portraitColor: '#8B6F5E' },
 };
 
 // ====== 结果类型 ======
@@ -238,6 +238,17 @@ function simulateOne(test: TestCase): SimulationResult {
 
   // 花园使用概率
   const gardenChance = getGardenChance(test.gardenLevel);
+
+  // 养成式花园：2 个花盆
+  const gardenPlots: { plant: 'mint' | 'gardenia' | 'orchid' | null; plantedDay: number }[] = [
+    { plant: null, plantedDay: 0 },
+    { plant: null, plantedDay: 0 },
+  ];
+  const gardenPlantDefs = [
+    { id: 'mint' as const, daysToGrow: 2, harvest: { health: 12, risk: -6 } },
+    { id: 'gardenia' as const, daysToGrow: 4, harvest: { popularity: 10, favor: 4 } },
+    { id: 'orchid' as const, daysToGrow: 5, harvest: { prestige: 10, favor: 4 } },
+  ];
 
   // 主循环
   for (let day = 1; day <= TOTAL_DAYS; day++) {
@@ -343,26 +354,30 @@ function simulateOne(test: TestCase): SimulationResult {
       stats.risk = Math.max(0, stats.risk - 1);
     }
 
-    // === 花园 ===
-    if (rng() < gardenChance) {
-      gardenUses++;
-      const roll = rng();
-      if (roll < 0.4) {
-        stats.health = clamp(stats.health + 5);
-        stats.popularity = clamp(stats.popularity + 2);
-        stats.risk = clamp(stats.risk - 2);
-        totalHealthRecovered += 5;
-      } else if (roll < 0.7) {
-        stats.health = clamp(stats.health + 5);
-        stats.risk = clamp(stats.risk - 3);
-        totalHealthRecovered += 5;
-      } else {
-        stats.health = clamp(stats.health + 3);
-        stats.popularity = clamp(stats.popularity + 5);
-        stats.prestige = clamp(stats.prestige + 3);
-        stats.favor = clamp(stats.favor + 1);
-        stats.risk = clamp(stats.risk - 1);
-        totalHealthRecovered += 3;
+    // === 花园（养成式：种下→生长→收成） ===
+    for (let pi = 0; pi < gardenPlots.length; pi++) {
+      const plot = gardenPlots[pi];
+      if (plot.plant) {
+        const def = gardenPlantDefs.find(p => p.id === plot.plant)!;
+        if (day - plot.plantedDay >= def.daysToGrow) {
+          // 收成（不受周关键词影响）
+          gardenUses++;
+          if (def.harvest.health) { stats.health = clamp(stats.health + def.harvest.health); totalHealthRecovered += def.harvest.health; }
+          if (def.harvest.popularity) stats.popularity = clamp(stats.popularity + def.harvest.popularity);
+          if (def.harvest.prestige) stats.prestige = clamp(stats.prestige + def.harvest.prestige);
+          if (def.harvest.favor) stats.favor = clamp(stats.favor + def.harvest.favor);
+          if (def.harvest.risk) stats.risk = clamp(stats.risk + def.harvest.risk);
+          plot.plant = null;
+          plot.plantedDay = 0;
+        }
+      } else if (rng() < gardenChance) {
+        // 种下：健康低/风险高优先薄荷，否则按人缘/名望差距选择
+        let type: 'mint' | 'gardenia' | 'orchid' = 'mint';
+        if (stats.health >= 55 && stats.risk <= 55) {
+          type = stats.popularity <= stats.prestige ? 'gardenia' : 'orchid';
+        }
+        plot.plant = type;
+        plot.plantedDay = day;
       }
     }
 
@@ -392,7 +407,7 @@ function simulateOne(test: TestCase): SimulationResult {
     completedEvents: [],
     inventory,
     equippedProp,
-    gardenUsedToday: false,
+    garden: { plots: gardenPlots, harvested: gardenUses },
     gameOver: deathDay !== null,
     ending: null as string | null,
   };

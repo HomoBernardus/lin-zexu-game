@@ -55,7 +55,7 @@
       "day": 1,
       "phase": "noon",
       "title": "食堂相遇",
-      "description": "端着餐盘，你发现角落有个空位。坐下的瞬间，对面的年轻人抬头看了你一眼——是小王，技术部那个总被烟味熏得咳嗽的程序员。",
+      "description": "端着餐盘，你发现角落有个空位。坐下的瞬间，对面的年轻人抬头看了你一眼——是小苏，技术部那个总被烟味熏得咳嗽的程序员。",
       "choices": [
         {
           "id": "w1d1_friendly",
@@ -260,7 +260,7 @@
       "day": 2,
       "phase": "evening",
       "title": "加班时刻",
-      "description": "晚上九点，办公室里只剩下你和小王。老赵的工位空着，但烟灰缸里残留的烟头还在散味。小王捂着鼻子，烦躁地盯着屏幕上的bug。",
+      "description": "晚上九点，办公室里只剩下你和小苏。老赵的工位空着，但烟灰缸里残留的烟头还在散味。小苏捂着鼻子，烦躁地盯着屏幕上的bug。",
       "choices": [
         {
           "id": "w1d2_eve_help",
@@ -456,97 +456,9 @@
     },
     {
       "day": 4,
-      "phase": "morning",
-      "title": "打印机旁的对话",
-      "description": "在打印机旁，你遇到了一位看起来温和的中年女同事。她主动开口：「听说你对烟味意见挺大？」",
-      "choices": [
-        {
-          "id": "w1d4_mo_confirm",
-          "text": "「二手烟确实对大家都不好」",
-          "delta": {
-            "health": 0,
-            "popularity": 0,
-            "prestige": 2,
-            "favor": 0,
-            "risk": 4
-          },
-          "butterflyFlag": "liu_sales_aware"
-        },
-        {
-          "id": "w1d4_mo_deflect",
-          "text": "「没有没有，只是个人身体问题」",
-          "delta": {
-            "health": -1,
-            "popularity": 3,
-            "prestige": -2,
-            "favor": 1,
-            "risk": -3
-          }
-        },
-        {
-          "id": "w1d4_mo_ask",
-          "text": "「你怎么看这事？」她摇摇头：「老问题了，但你愿意试试也挺好。」",
-          "delta": {
-            "health": -1,
-            "popularity": 5,
-            "prestige": 1,
-            "favor": 2,
-            "risk": 0
-          },
-          "butterflyFlag": "ask_liu_opinion"
-        }
-      ],
-      "id": "w1d4_morning"
-    },
-    {
-      "day": 4,
-      "phase": "noon",
-      "title": "办公室的烟味举报",
-      "description": "物业在公告栏贴了一张通知：「近日接到办公区吸烟投诉，请各位同事自觉遵守。」老赵站在公告栏前，看完后冷笑了一声。",
-      "choices": [
-        {
-          "id": "w1d4_claim",
-          "text": "「是我投诉的」",
-          "delta": {
-            "health": -1,
-            "popularity": -12,
-            "prestige": 6,
-            "favor": 0,
-            "risk": 10
-          },
-          "butterflyFlag": "claimed_report"
-        },
-        {
-          "id": "w1d4_quiet",
-          "text": "沉默走过，不表态",
-          "delta": {
-            "health": -1,
-            "popularity": -1,
-            "prestige": -3,
-            "favor": 0,
-            "risk": -2
-          }
-        },
-        {
-          "id": "w1d4_pretend",
-          "text": "「早该管管了，不知道是谁干的」",
-          "delta": {
-            "health": -1,
-            "popularity": 4,
-            "prestige": -5,
-            "favor": 0,
-            "risk": -1
-          },
-          "butterflyFlag": "pretended_ignorant"
-        }
-      ],
-      "id": "w1d4_noon"
-    },
-    {
-      "day": 4,
       "phase": "evening",
-      "title": "小王的困境",
-      "description": "小王端着饭盒坐到你旁边，脸色不太好。「赵哥今天找我了，问我是不是跟你一伙的。」他看起来有些紧张。",
+      "title": "小苏的困境",
+      "description": "小苏端着饭盒坐到你旁边，脸色不太好。「赵哥今天找我了，问我是不是跟你一伙的。」他看起来有些紧张。",
       "choices": [
         {
           "id": "w1d4_protect",
@@ -838,50 +750,6 @@
         }
       ],
       "id": "w1d7_morning"
-    },
-    {
-      "day": 7,
-      "phase": "evening",
-      "title": "第一周结束",
-      "description": "周日夜晚，你坐在窗前。回想这一周——老赵的敌意、老刘的警告、陈哥的试探、小王的犹豫……你有些疲惫，但也更清楚自己想要什么。",
-      "choices": [
-        {
-          "id": "w1d7_reflect",
-          "text": "复盘得失，坚定路线",
-          "delta": {
-            "health": 0,
-            "popularity": 2,
-            "prestige": 1,
-            "favor": 2,
-            "risk": -2
-          },
-          "butterflyFlag": "week1_reflected"
-        },
-        {
-          "id": "w1d7_rest",
-          "text": "好好休息，顺其自然",
-          "delta": {
-            "health": 0,
-            "popularity": 0,
-            "prestige": -1,
-            "favor": 0,
-            "risk": 0
-          }
-        },
-        {
-          "id": "w1d7_prepare",
-          "text": "整理一周的观察笔记，为提案做准备",
-          "delta": {
-            "health": -1,
-            "popularity": 0,
-            "prestige": 5,
-            "favor": 1,
-            "risk": 1
-          },
-          "butterflyFlag": "week1_notes_prepared"
-        }
-      ],
-      "id": "w1d7_evening"
     }
   ]
 }

@@ -364,13 +364,13 @@
       "id": "w3d4_evening",
       "day": 18,
       "phase": "evening",
-      "title": "小王的决定",
+      "title": "小苏的决定",
       "conditions": {
         "requiresFlag": [
           "wang_app_created"
         ]
       },
-      "description": "小王给你发了一条消息：「哥/姐，那个工具我优化好了。要不要试试看？」",
+      "description": "小苏给你发了一条消息：「哥/姐，那个工具我优化好了。要不要试试看？」",
       "choices": [
         {
           "id": "w3d4_yes",
@@ -738,50 +738,6 @@
             "chen": 15
           },
           "butterflyFlag": "source_hunt"
-        }
-      ]
-    },
-    {
-      "id": "w3d7_afternoon",
-      "day": 21,
-      "phase": "afternoon",
-      "title": "余波",
-      "description": "小周的事像一块石头砸进了池塘。茶水间里，你听到有人在议论：「听说小林看着小周被开除了……」「连自己人都护不住，还想护全公司？」",
-      "choices": [
-        {
-          "id": "w3d7_zhou_aftermath_own",
-          "text": "走进去：「小周的事是我没处理好。但禁烟这件事，我不会放弃」",
-          "delta": {
-            "health": -1,
-            "popularity": 4,
-            "prestige": 4,
-            "favor": -2,
-            "risk": 5
-          },
-          "butterflyFlag": "owned_zhou_aftermath"
-        },
-        {
-          "id": "w3d7_zhou_aftermath_quiet",
-          "text": "转身离开。有些话，传就传吧",
-          "delta": {
-            "health": -1,
-            "popularity": -5,
-            "prestige": -5,
-            "favor": 0,
-            "risk": -2
-          }
-        },
-        {
-          "id": "w3d7_zhou_aftermath_fight",
-          "text": "「小周被开除是因为她说出了真相。如果公司连真话都容不下，那我也没什么好说的」",
-          "delta": {
-            "health": -2,
-            "popularity": -10,
-            "prestige": 8,
-            "favor": -8,
-            "risk": 16
-          },
-          "butterflyFlag": "public_defense_of_zhou"
         }
       ]
     }

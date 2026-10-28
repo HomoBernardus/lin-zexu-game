@@ -3,7 +3,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: '林则徐 · 都市销烟录',
-  description: '30天，决定一家公司的命运。刚柔并济，方能销烟革新。',
+  description: '28天，决定一家公司的命运。刚柔并济，方能销烟革新。',
 };
 
 export const viewport: Viewport = {

@@ -434,6 +434,14 @@ button {
   margin-bottom: 1rem;
 }
 
+.modal-persona {
+  font-size: 0.8125rem;
+  color: #8B7355;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
 .modal-quote {
   background: #FDF9F5;
   border-radius: 0.75rem;
@@ -457,89 +465,178 @@ button {
 }
 
 /* ===== 后花园 ===== */
-.garden-health {
-  text-align: center;
-  margin-bottom: 1rem;
+.garden-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.375rem;
 }
 
-.garden-health .health-num {
-  font-size: 1.5rem;
-  font-family: "Songti SC", "STSong", "Noto Serif SC", "SimSun", serif;
-  color: #D4956A;
-  font-weight: 600;
-}
-
-.garden-health .health-flower {
-  font-size: 1.875rem;
-  vertical-align: middle;
-  margin-right: 0.25rem;
-}
-
-.garden-health .health-label {
-  font-size: 0.6875rem;
+.garden-harvested {
+  font-size: 0.5625rem;
   color: #C4B8A8;
-  margin-top: 0.25rem;
+}
+
+.garden-subtitle {
+  font-size: 0.625rem;
+  color: #9B8B7A;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.garden-plot {
+  background: #FDF9F5;
+  border: 1.5px solid #EBE5DD;
+  border-radius: 0.875rem;
+  padding: 0.75rem;
+  margin-bottom: 0.625rem;
+}
+
+.garden-plot-label {
+  font-size: 0.625rem;
+  color: #9B8B7A;
+  margin-bottom: 0.5rem;
+}
+
+.garden-seeds {
+  display: flex;
+}
+
+.garden-seed {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0.25rem;
+  border-radius: 0.625rem;
+  background: #FFFFFF;
+  border: 1px solid #EBE5DD;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.25s, background-color 0.25s;
+}
+
+.garden-seed + .garden-seed {
+  margin-left: 0.375rem;
+}
+
+.garden-seed:hover {
+  border-color: #D4A574;
+  background: #FFF8F2;
+}
+
+.garden-seed-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: block;
+  margin: 0 auto;
+}
+
+.garden-seed-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.garden-seed-name {
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: #2D2420;
+  margin-top: 0.125rem;
+}
+
+.garden-seed-meta {
+  font-size: 0.5625rem;
+  color: #C4B8A8;
+  line-height: 1.25;
+  margin-top: 0.125rem;
+}
+
+.garden-plot-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.garden-plot-name {
+  display: flex;
+  align-items: center;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #2D2420;
 }
 
 .garden-row {
   display: flex;
+  align-items: center;
 }
 
-.garden-row .garden-button {
-  flex: 1 1 0;
+.garden-flower {
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.garden-flower svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.garden-flower.dim {
+  opacity: 0.55;
+  filter: saturate(0.6);
+}
+
+.garden-info {
+  flex: 1 1 auto;
   min-width: 0;
-}
-
-.garden-row .garden-button + .garden-button {
   margin-left: 0.5rem;
 }
 
-.garden-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0.875rem 0.5rem;
-  border-radius: 0.875rem;
-  background: #FDF9F5;
-  border: 1.5px solid #EBE5DD;
-  cursor: pointer;
-  transition: border-color 0.25s, background-color 0.25s, transform 0.25s;
-  text-align: center;
-}
-
-.garden-button:hover {
-  border-color: #D4A574;
-  background: #FFF8F2;
-  transform: translateY(-2px);
-}
-
-.garden-button:active {
-  transform: translateY(0);
-}
-
-.garden-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.garden-icon {
-  font-size: 1.25rem;
-  margin-bottom: 0.25rem;
-}
-
-.garden-name {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #2D2420;
-  margin-bottom: 0.125rem;
-}
-
 .garden-desc {
-  font-size: 0.625rem;
+  font-size: 0.5625rem;
+  color: #C4B8A8;
+  margin-bottom: 0.375rem;
+}
+
+.garden-plot-state {
+  font-size: 0.5625rem;
   color: #9B8B7A;
-  line-height: 1.3;
-  text-align: center;
+}
+
+.garden-progress {
+  margin-top: 0.5rem;
+  height: 0.375rem;
+  background: #F0E8DD;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.garden-progress-bar {
+  height: 100%;
+  border-radius: 999px;
+  background: #7CB518;
+  transition: width 0.3s;
+}
+
+.garden-harvest {
+  margin-top: 0.625rem;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.625rem;
+  background: #7CB518;
+  color: #FFFFFF;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.garden-harvest:hover {
+  background: #6BA812;
 }
 
 .garden-feedback {
@@ -1029,11 +1126,6 @@ button {
 .grayscale {
   -webkit-filter: grayscale(1);
   filter: grayscale(1);
-}
-
-.garden-button.active {
-  border-color: #D4A574;
-  background-color: #FFF8F2;
 }
 
 /* ===== 动画 ===== */

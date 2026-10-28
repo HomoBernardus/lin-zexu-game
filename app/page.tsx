@@ -94,7 +94,7 @@ export default function Home() {
           林则徐 · 都市销烟录
         </h1>
         <p className="text-xs text-[#9B8B7A] mt-1.5 tracking-widest text-center">
-          30天 · 决定一家公司的命运
+          28天 · 决定一家公司的命运
         </p>
       </header>
 

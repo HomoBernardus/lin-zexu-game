@@ -13,6 +13,7 @@ export interface GameStats {
 export interface NPCBio {
   intro: string;
   quote: string | null;
+  persona: string; // 一句话人设
 }
 
 export interface NPC {
@@ -48,6 +49,36 @@ export interface ChoiceDelta {
   prestige?: number;
   favor?: number;
   risk?: number;
+}
+
+// 养成式花园
+export type PlantType = 'mint' | 'gardenia' | 'orchid';
+
+export interface PlantConfig {
+  id: PlantType;
+  name: string;
+  svg: string;          // 专属图标（SVG，含同色系底圈）
+  daysToGrow: number;
+  harvest: ChoiceDelta; // 收成奖励
+  desc: string;         // 一句话说明
+  flavor: string;       // 收成文案
+}
+
+export interface GardenPlot {
+  plant: PlantType | null;
+  plantedDay: number; // 种下的天数（day 值）
+}
+
+export interface GardenEvent {
+  id: string;
+  text: string;
+  npcAffect?: { wang?: number; chen?: number; li?: number; zhou?: number };
+  stat?: ChoiceDelta;
+}
+
+export interface GardenState {
+  plots: GardenPlot[];
+  harvested: number; // 累计收成次数
 }
 
 export interface Choice {
@@ -120,7 +151,7 @@ export interface GameState {
   inventory: Record<PropType, boolean>;
   equippedProp: PropType | null;
   gameOver: boolean;
-  gardenUsedToday: boolean;
+  garden: GardenState;
   ending: string | null;
 }
 

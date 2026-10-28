@@ -3,7 +3,7 @@ import { GameStats } from '@/types/game';
 // 游戏常量配置
 
 export const GAME_CONFIG = {
-  TOTAL_DAYS: 30,
+  TOTAL_DAYS: 28,
   TOTAL_WEEKS: 4,
   START_DATE: '4月1日',
   MAX_STAT: 100,
@@ -26,15 +26,15 @@ export const GAME_CONFIG = {
   },
 
   // 攻略阈值（提高以降低完美通关率）
-  CONQUEST_THRESHOLD: 65,
-  DUAL_THRESHOLD: 110,
+  CONQUEST_THRESHOLD: 60,
+  DUAL_THRESHOLD: 105,
 
   // 周关键词持续时间
   MODIFIER_DURATION_DAYS: 7,
 
   // 健康衰减
-  BASE_HEALTH_DRAIN: 2,
-  RISK_DECAY_INTERVAL: 2,
+  BASE_HEALTH_DRAIN: 1,
+  RISK_DECAY_INTERVAL: 1,
 };
 
 export const STAT_LABELS: Record<keyof GameStats, { name: string; color: string; icon: string }> = {

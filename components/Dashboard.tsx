@@ -2,10 +2,15 @@
 
 import { STAT_LABELS, GAME_CONFIG } from '@/lib/constants';
 import { useGameStore } from '@/hooks/useGameState';
+import { calculateSupport } from '@/lib/gameLogic';
 
 export default function Dashboard() {
   const { stats, weeklyModifier, day, week } = useGameStore();
   const statsArray = Object.entries(stats) as [keyof typeof stats, number][];
+
+  const store = useGameStore.getState();
+  const conqueredCount = [store.npcs.wang, store.npcs.chen, store.npcs.li].filter((n) => n.isConquered).length;
+  const support = calculateSupport(store);
 
   return (
     <div className="card">
@@ -47,6 +52,21 @@ export default function Dashboard() {
             </div>
           );
         })}
+      </div>
+
+      {/* 通关目标 */}
+      <div className="mt-4 pt-3 border-t border-[#F0E8DD]">
+        <div className="flex justify-between text-[11px] text-[#8B7355]">
+          <span className="font-semibold">通关目标</span>
+          <span>已攻略 {conqueredCount}/2 · 支持率 {support}/65</span>
+        </div>
+        <div className="mt-1.5 h-1.5 bg-[#F0E8DD] rounded-full overflow-hidden">
+          <div
+            className="h-full rounded-full"
+            style={{ width: `${Math.min((support / 65) * 100, 100)}%`, backgroundColor: '#7CB518' }}
+          />
+        </div>
+        <p className="text-[10px] text-[#C4B8A8] mt-1">推动禁烟：攻略 2 位同事，支持率 ≥65</p>
       </div>
 
       {/* 进度 */}

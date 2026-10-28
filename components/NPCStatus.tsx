@@ -126,8 +126,8 @@ export default function NPCStatus() {
                 {selectedNpc.name[0]}
               </div>
               <div>
-                <div className="text-base font-serif text-[#2D2420]">{selectedNpc.nickname}</div>
-                <div className="text-xs text-[#9B8B7A]">{selectedNpc.title}</div>
+                <div className="text-base font-serif text-[#2D2420]">{selectedNpc.name}</div>
+                <div className="text-xs text-[#9B8B7A]">{selectedNpc.nickname} · {selectedNpc.title}</div>
               </div>
               <div className="ml-auto text-right">
                 <div
@@ -137,6 +137,13 @@ export default function NPCStatus() {
                   {selectedNpc.isConquered ? '已攻略' : `好感 ${selectedNpc.affinity}`}
                 </div>
               </div>
+            </div>
+
+            {/* 一句话人设 */}
+            <div className="bg-[#FDF9F5] rounded-xl px-4 py-3 border border-[#F0E8DD] mb-3">
+              <p className="text-sm text-[#8B7355] font-medium leading-relaxed">
+                {npcBios[selectedNpc.id]?.persona ?? ''}
+              </p>
             </div>
 
             {/* 人设介绍 */}

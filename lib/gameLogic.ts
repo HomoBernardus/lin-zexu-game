@@ -45,7 +45,7 @@ export function updateNPCAffinity(
   const newNpcs = { ...npcs };
   
   // 好感提升时同步累积双路径，权重按NPC角色定位分配
-  // 小王：同龄人，先做朋友，专业能力也能建立威信 (7:3)
+  // 小苏：同龄人，先做朋友，专业能力也能建立威信 (7:3)
   if (affects.wang !== undefined) {
     newNpcs.wang.affinity = clamp(newNpcs.wang.affinity + affects.wang);
     if (affects.wang > 0) {
@@ -110,8 +110,8 @@ export function calculateSupport(state: GameState): number {
   
   // 人缘与影响力的平衡惩罚
   const diff = Math.abs(state.stats.prestige - state.stats.popularity);
-  if (diff > 40) {
-    support -= state.stats.prestige > state.stats.popularity ? 15 : 10;
+  if (diff > 50) {
+    support -= state.stats.prestige > state.stats.popularity ? 8 : 5;
   }
   
   return Math.round(support);
@@ -132,13 +132,13 @@ export function determineEnding(state: GameState): EndingType {
   ].filter(Boolean).length;
 
   // 隐藏结局：完美通关（3 NPC + 极高支持率）
-  if (conqueredCount === 3 && support >= 108) return 'perfect_triumph';
+  if (conqueredCount === 3 && support >= 115) return 'perfect_triumph';
 
   // 隐藏结局：孤狼 — 高影响力但低人缘
   if (state.stats.prestige >= 55 && state.stats.popularity <= 45) return 'lone_wolf';
 
   // 主要结局
-  if (support >= 72 && conqueredCount >= 2) return 'success_full';
+  if (support >= 65 && conqueredCount >= 2) return 'success_full';
   if (support >= 40 && conqueredCount >= 1) return 'success_partial';
 
   // 活着但没有盟友

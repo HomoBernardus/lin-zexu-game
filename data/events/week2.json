@@ -3,49 +3,6 @@
   "title": "冲突期",
   "events": [
     {
-      "id": "w2d1_morning",
-      "day": 8,
-      "phase": "morning",
-      "title": "周一·新关键词",
-      "description": "新的一周开始。空气中有什么不一样了。",
-      "choices": [
-        {
-          "id": "w2d1_observe",
-          "text": "先观察这周的氛围",
-          "delta": {
-            "health": -1,
-            "popularity": 2,
-            "prestige": 1,
-            "favor": 1,
-            "risk": -1
-          }
-        },
-        {
-          "id": "w2d1_aggressive",
-          "text": "趁着新气象，主动出击",
-          "delta": {
-            "health": -1,
-            "popularity": -3,
-            "prestige": 4,
-            "favor": -2,
-            "risk": 10
-          },
-          "butterflyFlag": "aggressive_week2"
-        },
-        {
-          "id": "w2d1_cautious",
-          "text": "低调行事，保存实力",
-          "delta": {
-            "health": -1,
-            "popularity": 4,
-            "prestige": -1,
-            "favor": 0,
-            "risk": -3
-          }
-        }
-      ]
-    },
-    {
       "id": "w2d1_afternoon",
       "day": 8,
       "phase": "afternoon",
@@ -203,8 +160,8 @@
       "id": "w2d2_noon",
       "day": 9,
       "phase": "noon",
-      "title": "小王求助",
-      "description": "午休时，小王走到你工位旁边，表情有些疲惫：「老赵又在工位抽烟了，我跟他提了一句，他说我多管闲事……你觉得我该怎么办？」",
+      "title": "小苏求助",
+      "description": "午休时，小苏走到你工位旁边，表情有些疲惫：「老赵又在工位抽烟了，我跟他提了一句，他说我多管闲事……你觉得我该怎么办？」",
       "choices": [
         {
           "id": "w2d2_refuse_gentle",
@@ -248,53 +205,6 @@
           },
           "npcAffect": {
             "wang": -5
-          }
-        }
-      ]
-    },
-    {
-      "id": "w2d2_evening",
-      "day": 9,
-      "phase": "evening",
-      "title": "烟味再起",
-      "description": "加班到八点，老赵和几个老同事又聚在楼梯间抽烟。烟味顺着门缝飘进来，小王的工位正好在下风口。你看见小王把口罩戴上了。",
-      "choices": [
-        {
-          "id": "w2d2_open_door",
-          "text": "推开门：「楼道禁止吸烟，这是公司规定」",
-          "delta": {
-            "health": 0,
-            "popularity": -10,
-            "prestige": 4,
-            "favor": -1,
-            "risk": 8
-          },
-          "butterflyFlag": "stairwell_confront_w2d2"
-        },
-        {
-          "id": "w2d2_report_now",
-          "text": "拍下照片，发给物业",
-          "delta": {
-            "health": 0,
-            "popularity": -5,
-            "prestige": 3,
-            "favor": 0,
-            "risk": 6
-          },
-          "butterflyFlag": "stairwell_photo_w2d2"
-        },
-        {
-          "id": "w2d2_ignore",
-          "text": "帮小王把工位搬到上风口",
-          "delta": {
-            "health": -1,
-            "popularity": 5,
-            "prestige": 1,
-            "favor": 1,
-            "risk": 0
-          },
-          "npcAffect": {
-            "wang": 8
           }
         }
       ]
@@ -344,53 +254,6 @@
             "popularity": 0,
             "prestige": -2,
             "favor": 0,
-            "risk": -2
-          }
-        }
-      ]
-    },
-    {
-      "id": "w2d3_afternoon",
-      "day": 10,
-      "phase": "afternoon",
-      "title": "匿名投诉",
-      "description": "公司收到了一封匿名投诉信，举报有人在会议室抽烟。大家都在议论是谁写的。",
-      "choices": [
-        {
-          "id": "w2d3_claim",
-          "text": "主动承认：「是我，但我不匿名」",
-          "delta": {
-            "health": -2,
-            "popularity": -8,
-            "prestige": 10,
-            "favor": -5,
-            "risk": 16
-          },
-          "butterflyFlag": "claimed_complaint",
-          "npcAffect": {
-            "chen": -3,
-            "li": -8
-          }
-        },
-        {
-          "id": "w2d3_silent",
-          "text": "沉默不语，但心里认同",
-          "delta": {
-            "health": 0,
-            "popularity": 2,
-            "prestige": 0,
-            "favor": 0,
-            "risk": 5
-          }
-        },
-        {
-          "id": "w2d3_deflect",
-          "text": "「我觉得可能是其他人」",
-          "delta": {
-            "health": -1,
-            "popularity": -2,
-            "prestige": -4,
-            "favor": 1,
             "risk": -2
           }
         }
@@ -500,57 +363,6 @@
             "li": 6
           },
           "butterflyFlag": "bypassed_chen_to_li"
-        }
-      ]
-    },
-    {
-      "id": "w2d4_noon",
-      "day": 11,
-      "phase": "noon",
-      "title": "餐桌上的反驳",
-      "description": "午餐时间，你端着餐盘走进食堂，看到李总和几个部门经理坐在一起。你端着餐盘在邻桌坐下，听到李总的声音：「烟确实不好，但有些事不是规定能解决的。我在公司这么多年，见过太多一纸空文。不如慢慢来，引导为主。」几个经理频频点头。",
-      "choices": [
-        {
-          "id": "w2d4_lunch_interrupt",
-          "text": "端着餐盘坐过去：「李总，不好意思听到了。如果是钱的问题，我可以现在算一笔账——医保多缴的、病假损失、办公设备折旧被烟熏——去年这些加起来至少是这个数」",
-          "delta": {
-            "health": -1,
-            "popularity": -8,
-            "prestige": 8,
-            "favor": -6,
-            "risk": 12
-          },
-          "npcAffect": {
-            "li": -15
-          },
-          "butterflyFlag": "challenged_li_public_lunch"
-        },
-        {
-          "id": "w2d4_lunch_pursue",
-          "text": "散场后，追上去：「李总，刚才的话我不完全同意。方便的时候，可以给我十分钟吗？」",
-          "delta": {
-            "health": 0,
-            "popularity": -1,
-            "prestige": 3,
-            "favor": 0,
-            "risk": 5
-          },
-          "npcAffect": {
-            "li": -3
-          },
-          "butterflyFlag": "pursued_li_after_lunch"
-        },
-        {
-          "id": "w2d4_lunch_silent",
-          "text": "低头继续吃饭，但心里记下了每一个反对的论点",
-          "delta": {
-            "health": -1,
-            "popularity": 1,
-            "prestige": 1,
-            "favor": 1,
-            "risk": 0
-          },
-          "butterflyFlag": "noted_lunch_arguments"
         }
       ]
     },
@@ -821,8 +633,8 @@
       "id": "w2d6_noon",
       "day": 13,
       "phase": "noon",
-      "title": "小王的秘密",
-      "description": "小王神神秘秘地把你拉到楼梯间：「前辈，我写了个小工具，能记录每天谁在工位抽烟…你看有用吗？」",
+      "title": "小苏的秘密",
+      "description": "小苏神神秘秘地把你拉到楼梯间：「前辈，我写了个小工具，能记录每天谁在工位抽烟…你看有用吗？」",
       "conditions": {
         "requiresFlag": [
           "helped_wang_coding",
@@ -1021,7 +833,7 @@
         },
         {
           "id": "w2d7_group_allies",
-          "text": "不回应。把数据整理好，私下发给陈哥和小王",
+          "text": "不回应。把数据整理好，私下发给陈哥和小苏",
           "delta": {
             "health": 0,
             "popularity": 3,

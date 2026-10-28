@@ -1,21 +1,28 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { GameState, GameEvent, Choice, WeeklyModifier, PropType, GameNotification } from '@/types/game';
+import { GameState, GameEvent, Choice, WeeklyModifier, PropType, GameNotification, GardenState, PlantType } from '@/types/game';
 import { GAME_CONFIG } from '@/lib/constants';
 import { getRandomModifier } from '@/data/weeklyModifiers';
 import { props as propDefs } from '@/data/props';
+import { plants as plantDefs, gardenEvents, PLOT_COUNT, GARDEN_EVENT_CHANCE } from '@/data/garden';
 import { applyDelta, updateNPCAffinity, checkNPCConquest } from '@/lib/gameLogic';
 
 function getHealthDrainBonus(modifier: WeeklyModifier | null): number {
   if (!modifier) return 0;
   switch (modifier.name) {
-    case '梅雨': return 3;
-    case '大检': return 2;
-    case '裁员': return 4;
-    case '酷暑': return 3;
-    case '项目冲刺': return 1;
+    case '梅雨': return 1;
+    case '大检': return 1;
+    case '裁员': return 2;
+    case '酷暑': return 1;
+    case '项目冲刺': return 0;
     default: return 0;
   }
+}
+
+function freshGarden(): GardenState {
+  const plots = [];
+  for (let i = 0; i < PLOT_COUNT; i++) plots.push({ plant: null, plantedDay: 0 });
+  return { plots, harvested: 0 };
 }
 
 interface GameStore extends GameState {
@@ -24,7 +31,8 @@ interface GameStore extends GameState {
   initializeGame: () => void;
   applyChoice: (choice: Choice, event: GameEvent) => void;
   nextDay: () => void;
-  gardenAction: (actionType: 'prune' | 'water' | 'meditate') => void;
+  plant: (plotIndex: number, plantType: PlantType) => void;
+  harvest: (plotIndex: number) => string | null;
   equipProp: (propType: PropType) => void;
   unequipProp: () => void;
   clearNotification: () => void;
@@ -37,8 +45,8 @@ const initialStats = { ...GAME_CONFIG.INITIAL_STATS };
 const initialNPCs = {
   wang: {
     id: 'wang' as const,
-    name: '王',
-    nickname: '小王',
+    name: '苏辰',
+    nickname: '小苏',
     title: '技术部',
     affinity: GAME_CONFIG.INITIAL_NPCS.wang.affinity,
     prestigePath: GAME_CONFIG.INITIAL_NPCS.wang.prestigePath,
@@ -49,7 +57,7 @@ const initialNPCs = {
   },
   chen: {
     id: 'chen' as const,
-    name: '陈',
+    name: '陈文彬',
     nickname: '陈哥',
     title: 'HR',
     affinity: GAME_CONFIG.INITIAL_NPCS.chen.affinity,
@@ -61,7 +69,7 @@ const initialNPCs = {
   },
   li: {
     id: 'li' as const,
-    name: '李',
+    name: '李婉宁',
     nickname: '李总',
     title: '副总经理',
     affinity: GAME_CONFIG.INITIAL_NPCS.li.affinity,
@@ -73,7 +81,7 @@ const initialNPCs = {
   },
   zhou: {
     id: 'zhou' as const,
-    name: '周',
+    name: '周雨桐',
     nickname: '小周',
     title: '技术部',
     affinity: 60,
@@ -85,7 +93,7 @@ const initialNPCs = {
   },
   zhao: {
     id: 'zhao' as const,
-    name: '赵',
+    name: '赵德柱',
     nickname: '老赵',
     title: '市场部',
     affinity: 15,
@@ -112,7 +120,7 @@ export const useGameStore = create<GameStore>()(
       completedEvents: [],
       inventory: { mask: true, fan: false, watergun: false, gasmask: false },
       equippedProp: null,
-      gardenUsedToday: false,
+      garden: freshGarden(),
       gameOver: false,
       ending: null,
       notification: null,
@@ -132,7 +140,7 @@ export const useGameStore = create<GameStore>()(
           completedEvents: [],
           inventory: { mask: true, fan: false, watergun: false, gasmask: false },
           equippedProp: null,
-          gardenUsedToday: false,
+          garden: freshGarden(),
           gameOver: false,
           ending: null,
           notification: null,
@@ -273,31 +281,57 @@ export const useGameStore = create<GameStore>()(
           stats: newStats,
           weeklyModifier: newModifier,
           modifierRemainingDays: newRemainingDays,
-          gardenUsedToday: false,
           gameOver,
         });
       },
 
-      // 后花园活动
-      gardenAction: (actionType) => {
+      // 后花园：种下花籽
+      plant: (plotIndex, plantType) => {
         const state = get();
-        if (state.gameOver || state.gardenUsedToday) return;
-        let delta = { health: 0, popularity: 0, prestige: 0, favor: 0, risk: 0 };
-        
-        switch (actionType) {
-          case 'prune':
-            delta = { health: 5, popularity: 2, prestige: 0, favor: 0, risk: -2 };
-            break;
-          case 'water':
-            delta = { health: 5, popularity: 0, prestige: 0, favor: 0, risk: -3 };
-            break;
-          case 'meditate':
-            delta = { health: 3, popularity: 5, prestige: 3, favor: 1, risk: -1 };
-            break;
+        if (state.gameOver) return;
+        const plot = state.garden.plots[plotIndex];
+        if (!plot || plot.plant) return;
+        const plant = plantDefs.find(p => p.id === plantType);
+        if (!plant) return;
+
+        const newPlots = state.garden.plots.map((p, i) =>
+          i === plotIndex ? { plant: plantType, plantedDay: state.day } : p
+        );
+        set({ garden: { ...state.garden, plots: newPlots } });
+      },
+
+      // 后花园：收成
+      harvest: (plotIndex) => {
+        const state = get();
+        if (state.gameOver) return null;
+        const plot = state.garden.plots[plotIndex];
+        if (!plot || !plot.plant) return null;
+        const plant = plantDefs.find(p => p.id === plot.plant);
+        if (!plant) return null;
+        if (state.day - plot.plantedDay < plant.daysToGrow) return null;
+
+        let newStats = applyDelta(state.stats, plant.harvest, null);
+        let newNpcs = state.npcs;
+        let message = plant.flavor;
+
+        // 收成时随机触发花园小事件
+        if (Math.random() < GARDEN_EVENT_CHANCE) {
+          const evt = gardenEvents[Math.floor(Math.random() * gardenEvents.length)];
+          if (evt.stat) newStats = applyDelta(newStats, evt.stat, null);
+          if (evt.npcAffect) newNpcs = updateNPCAffinity(newNpcs, evt.npcAffect);
+          message = evt.text;
         }
-        
-        const newStats = applyDelta(state.stats, delta, null);
-        set({ stats: newStats, gardenUsedToday: true });
+
+        const newPlots = state.garden.plots.map((p, i) =>
+          i === plotIndex ? { plant: null, plantedDay: 0 } : p
+        );
+
+        set({
+          stats: newStats,
+          npcs: newNpcs,
+          garden: { plots: newPlots, harvested: state.garden.harvested + 1 },
+        });
+        return message;
       },
 
       // 装备道具
@@ -388,6 +422,7 @@ export const useGameStore = create<GameStore>()(
     }),
     {
       name: 'linzexu-game-storage',
+      version: 4, // 花园改为养成式（plots/harvested），丢弃旧存档
       partialize: (state) => ({
         day: state.day,
         week: state.week,
@@ -399,7 +434,7 @@ export const useGameStore = create<GameStore>()(
         completedEvents: state.completedEvents,
         inventory: state.inventory,
         equippedProp: state.equippedProp,
-        gardenUsedToday: state.gardenUsedToday,
+        garden: state.garden,
       }),
       merge: (persisted, initial) => ({
         ...initial,
@@ -411,6 +446,10 @@ export const useGameStore = create<GameStore>()(
         inventory: {
           ...initial.inventory,
           ...((persisted as { inventory?: typeof initial.inventory } | null)?.inventory ?? {}),
+        },
+        garden: {
+          ...initial.garden,
+          ...((persisted as { garden?: Partial<typeof initial.garden> } | null)?.garden ?? {}),
         },
       }),
     }

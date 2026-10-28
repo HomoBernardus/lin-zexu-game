@@ -17,11 +17,15 @@
   var ENDINGS = DATA.endings;
 
   var STORAGE_KEY = 'linzexu-game-storage';
+  var SAVE_VERSION = 4;
   var STAT_KEYS = ['health', 'popularity', 'prestige', 'favor', 'risk'];
   var NPC_ORDER = ['wang', 'chen', 'li', 'zhou', 'zhao'];
   var MAIN_NPC_ORDER = ['wang', 'chen', 'li'];
-  var PHASE_MAP = { morning: '晨', noon: '午', afternoon: '暮', night: '夜' };
+  var PHASE_MAP = { morning: '晨', noon: '午', afternoon: '暮', evening: '晚', night: '夜' };
   var WEEK_NAMES = ['', '第一周', '第二周', '第三周', '第四周'];
+  var PLANTS = DATA.plants;
+  var GARDEN_EVENTS = DATA.gardenEvents;
+  var GARDEN_CONFIG = DATA.gardenConfig;
 
   // ===== 运行时状态 =====
   var state = null;
@@ -63,6 +67,23 @@
       if (PROP_DEFS[i].id === id) return PROP_DEFS[i];
     }
     return null;
+  }
+
+  function findPlant(id) {
+    for (var i = 0; i < PLANTS.length; i++) {
+      if (PLANTS[i].id === id) return PLANTS[i];
+    }
+    return null;
+  }
+
+  function effectText(delta) {
+    var parts = [];
+    if (delta.health) parts.push((delta.health > 0 ? '+' : '') + delta.health + ' 健康');
+    if (delta.popularity) parts.push((delta.popularity > 0 ? '+' : '') + delta.popularity + ' 人缘');
+    if (delta.prestige) parts.push((delta.prestige > 0 ? '+' : '') + delta.prestige + ' 名望');
+    if (delta.favor) parts.push((delta.favor > 0 ? '+' : '') + delta.favor + ' 满意');
+    if (delta.risk) parts.push((delta.risk > 0 ? '+' : '') + delta.risk + ' 风险');
+    return parts.join(' / ');
   }
 
   function findEvent(id) {
@@ -118,7 +139,7 @@
       var id = NPC_ORDER[i];
       newNpcs[id] = cloneNPC(npcs[id]);
     }
-    // 小王：同龄人 (7:3)
+    // 小苏：同龄人 (7:3)
     if (affects.wang !== undefined) {
       newNpcs.wang.affinity = clamp(newNpcs.wang.affinity + affects.wang);
       if (affects.wang > 0) {
@@ -174,8 +195,8 @@
     if (s.activeFlags.indexOf('li_endorsement') !== -1) support += 15;
 
     var diff = Math.abs(s.stats.prestige - s.stats.popularity);
-    if (diff > 40) {
-      support -= s.stats.prestige > s.stats.popularity ? 15 : 10;
+    if (diff > 50) {
+      support -= s.stats.prestige > s.stats.popularity ? 8 : 5;
     }
     return Math.round(support);
   }
@@ -196,9 +217,9 @@
     var support = calculateSupport(s);
     var n = conqueredCount(s);
 
-    if (n === 3 && support >= 108) return 'perfect_triumph';
+    if (n === 3 && support >= 115) return 'perfect_triumph';
     if (s.stats.prestige >= 55 && s.stats.popularity <= 45) return 'lone_wolf';
-    if (support >= 72 && n >= 2) return 'success_full';
+    if (support >= 65 && n >= 2) return 'success_full';
     if (support >= 40 && n >= 1) return 'success_partial';
     return 'failure_ignored';
   }
@@ -210,11 +231,11 @@
   function getHealthDrainBonus(modifier) {
     if (!modifier) return 0;
     switch (modifier.name) {
-      case '梅雨': return 3;
-      case '大检': return 2;
-      case '裁员': return 4;
-      case '酷暑': return 3;
-      case '项目冲刺': return 1;
+      case '梅雨': return 1;
+      case '大检': return 1;
+      case '裁员': return 2;
+      case '酷暑': return 1;
+      case '项目冲刺': return 0;
       default: return 0;
     }
   }
@@ -248,6 +269,12 @@
     return npcs;
   }
 
+  function freshGarden() {
+    var plots = [];
+    for (var i = 0; i < GARDEN_CONFIG.plotCount; i++) plots.push({ plant: null, plantedDay: 0 });
+    return { plots: plots, harvested: 0 };
+  }
+
   function freshState() {
     var init = CONFIG.INITIAL_STATS;
     return {
@@ -268,7 +295,7 @@
       completedEvents: [],
       inventory: { mask: true, fan: false, watergun: false, gasmask: false },
       equippedProp: null,
-      gardenUsedToday: false,
+      garden: freshGarden(),
       gameOver: false,
       ending: null
     };
@@ -284,6 +311,7 @@
   function saveState() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        version: SAVE_VERSION,
         day: state.day,
         week: state.week,
         stats: state.stats,
@@ -294,7 +322,7 @@
         completedEvents: state.completedEvents,
         inventory: state.inventory,
         equippedProp: state.equippedProp,
-        gardenUsedToday: state.gardenUsedToday
+        garden: state.garden
       }));
     } catch (e) {
       // 忽略存储异常（隐私模式等）
@@ -308,6 +336,7 @@
     var saved = null;
     try { saved = JSON.parse(raw); } catch (e) { return null; }
     if (!saved || typeof saved !== 'object') return null;
+    if (saved.version !== SAVE_VERSION) return null; // 丢弃旧版本存档（天数/事件结构变更）
 
     var base = freshState();
 
@@ -336,6 +365,12 @@
     var stats = { health: base.stats.health, popularity: base.stats.popularity, prestige: base.stats.prestige, favor: base.stats.favor, risk: base.stats.risk };
     if (saved.stats) stats = Object.assign(stats, saved.stats);
 
+    var garden = freshGarden();
+    if (saved.garden) {
+      if (saved.garden.plots) garden.plots = saved.garden.plots;
+      if (saved.garden.harvested !== undefined) garden.harvested = saved.garden.harvested;
+    }
+
     return {
       day: saved.day !== undefined ? saved.day : base.day,
       week: saved.week !== undefined ? saved.week : base.week,
@@ -348,7 +383,7 @@
       completedEvents: saved.completedEvents || [],
       inventory: inventory,
       equippedProp: saved.equippedProp !== undefined ? saved.equippedProp : null,
-      gardenUsedToday: saved.gardenUsedToday !== undefined ? saved.gardenUsedToday : false,
+      garden: garden,
       gameOver: false,
       ending: null
     };
@@ -466,7 +501,6 @@
     state.stats = newStats;
     state.weeklyModifier = newModifier;
     state.modifierRemainingDays = newRemainingDays;
-    state.gardenUsedToday = false;
     state.gameOver = gameOver;
 
     // 自然结束（第 29 天起）
@@ -475,14 +509,43 @@
     }
   }
 
-  function gardenAction(actionType) {
-    if (state.gameOver || state.gardenUsedToday) return;
-    var delta;
-    if (actionType === 'prune') delta = { health: 5, popularity: 2, prestige: 0, favor: 0, risk: -2 };
-    else if (actionType === 'water') delta = { health: 5, popularity: 0, prestige: 0, favor: 0, risk: -3 };
-    else delta = { health: 3, popularity: 5, prestige: 3, favor: 1, risk: -1 };
-    state.stats = applyDelta(state.stats, delta, null);
-    state.gardenUsedToday = true;
+  function plant(plotIndex, plantType) {
+    if (state.gameOver) return;
+    var plot = state.garden.plots[plotIndex];
+    if (!plot || plot.plant) return;
+    var plantDef = findPlant(plantType);
+    if (!plantDef) return;
+
+    var newPlots = state.garden.plots.slice();
+    newPlots[plotIndex] = { plant: plantType, plantedDay: state.day };
+    state.garden = { plots: newPlots, harvested: state.garden.harvested };
+  }
+
+  function harvest(plotIndex) {
+    if (state.gameOver) return null;
+    var plot = state.garden.plots[plotIndex];
+    if (!plot || !plot.plant) return null;
+    var plantDef = findPlant(plot.plant);
+    if (!plantDef) return null;
+    if (state.day - plot.plantedDay < plantDef.daysToGrow) return null;
+
+    var newStats = applyDelta(state.stats, plantDef.harvest, null);
+    var newNpcs = state.npcs;
+    var message = plantDef.flavor;
+
+    if (Math.random() < GARDEN_CONFIG.eventChance) {
+      var evt = GARDEN_EVENTS[Math.floor(Math.random() * GARDEN_EVENTS.length)];
+      if (evt.stat) newStats = applyDelta(newStats, evt.stat, null);
+      if (evt.npcAffect) newNpcs = updateNPCAffinity(newNpcs, evt.npcAffect);
+      message = evt.text;
+    }
+
+    var newPlots = state.garden.plots.slice();
+    newPlots[plotIndex] = { plant: null, plantedDay: 0 };
+    state.garden = { plots: newPlots, harvested: state.garden.harvested + 1 };
+    state.stats = newStats;
+    state.npcs = newNpcs;
+    return message;
   }
 
   function equipProp(propType) {
@@ -561,18 +624,24 @@
     render();
   }
 
-  function onGarden(actionType) {
-    if (state.gameOver || state.gardenUsedToday) return;
-    var effects = { prune: '+5 健康 / -2 风险', water: '+5 健康 / -3 风险', meditate: '+3 健康 / +5 人缘' };
-    gardenAction(actionType);
-    ui.gardenMessage = effects[actionType];
+  function onPlant(plotIndex, plantType) {
+    plant(plotIndex, plantType);
+    ui.gardenMessage = null;
+    saveState();
+    render();
+  }
+
+  function onHarvest(plotIndex) {
+    var message = harvest(plotIndex);
+    if (message === null) return;
+    ui.gardenMessage = message;
     saveState();
     render();
     if (gardenTimer) clearTimeout(gardenTimer);
     gardenTimer = setTimeout(function () {
       ui.gardenMessage = null;
       render();
-    }, 2000);
+    }, 2600);
   }
 
   function onToggleProp(propType) {
@@ -649,6 +718,19 @@
       '<span>第 ' + state.day + ' / ' + CONFIG.TOTAL_DAYS + ' 天</span>' +
       '<span>第 ' + state.week + ' / ' + CONFIG.TOTAL_WEEKS + ' 周</span>' +
       '</div>';
+    var conqueredGoal = conqueredCount(state);
+    var supportGoal = calculateSupport(state);
+    var goalPct = Math.min(Math.round(supportGoal / 65 * 100), 100);
+    html += '<div style="margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #F0E8DD;">' +
+      '<div style="display:flex;justify-content:space-between;font-size:0.72rem;color:#8B7355;">' +
+      '<span style="font-weight:600;">通关目标</span>' +
+      '<span>已攻略 ' + conqueredGoal + '/2 · 支持率 ' + supportGoal + '/65</span>' +
+      '</div>' +
+      '<div style="margin-top:0.4rem;height:0.4rem;background:#F0E8DD;border-radius:999px;overflow:hidden;">' +
+      '<div style="height:100%;border-radius:999px;background:#7CB518;width:' + goalPct + '%;"></div>' +
+      '</div>' +
+      '<p style="font-size:0.7rem;color:#C4B8A8;margin-top:0.25rem;">推动禁烟：攻略 2 位同事，支持率 ≥65</p>' +
+      '</div>';
     html += '</div>';
     return html;
   }
@@ -691,9 +773,10 @@
     html += '<div class="modal" data-action="noop">';
     html += '<div class="modal-head">';
     html += '<div class="modal-avatar" style="background-color:' + avatarBg + ';color:' + npc.portraitColor + ';">' + esc(npc.name.charAt(0)) + '</div>';
-    html += '<div><div class="modal-name">' + esc(npc.nickname) + '</div><div class="modal-role">' + esc(npc.title) + '</div></div>';
+    html += '<div><div class="modal-name">' + esc(npc.name) + '</div><div class="modal-role">' + esc(npc.nickname) + ' · ' + esc(npc.title) + '</div></div>';
     html += '<div class="modal-value" style="color:' + valueColor + ';">' + esc(valueText) + '</div>';
     html += '</div>';
+    html += '<div class="modal-persona">' + esc(bio.persona || '') + '</div>';
     html += '<p class="modal-intro">' + esc(bio.intro) + '</p>';
     if (bio.quote) {
       html += '<div class="modal-quote"><p>"' + esc(bio.quote) + '"</p></div>';
@@ -717,38 +800,62 @@
     return html;
   }
 
-  function renderGarden() {
-    var actions = [
-      { id: 'prune', name: '修剪枝叶', icon: '✂️', desc: '静心修剪，恢复健康', effect: '+5 健康 / -2 风险' },
-      { id: 'water', name: '浇水灌溉', icon: '💧', desc: '悉心照料，洗涤心灵', effect: '+5 健康 / -3 风险' },
-      { id: 'meditate', name: '静坐冥想', icon: '🧘', desc: '思考得失，修身养性', effect: '+3 健康 / +5 人缘' }
-    ];
-
-    var html = '<div class="card">';
-    html += '<h3 class="panel-title">精神后花园</h3>';
-    html += '<div class="garden-health">' +
-      '<span class="health-flower">🌸</span>' +
-      '<span class="health-num">' + state.stats.health + '</span>' +
-      '<div class="health-label">当前肺部健康</div>' +
-      '</div>';
-    html += '<div class="garden-row">';
-    for (var i = 0; i < actions.length; i++) {
-      var a = actions[i];
-      var activeCls = (ui.gardenMessage === a.effect && !state.gardenUsedToday) ? ' active' : '';
-      html += '<button class="garden-button' + activeCls + '" data-action="garden" data-garden="' + a.id + '"' + (state.gardenUsedToday ? ' disabled' : '') + '>' +
-        '<span class="garden-icon">' + a.icon + '</span>' +
-        '<span class="garden-name">' + esc(a.name) + '</span>' +
-        '<span class="garden-desc">' + esc(a.desc) + '</span>' +
-        '</button>';
+  function gardenPlotHtml(index) {
+    var plot = state.garden.plots[index];
+    if (!plot || !plot.plant) {
+      var html = '<div class="garden-plot">' +
+        '<div class="garden-plot-label">空花盆 · 种点什么</div>' +
+        '<div class="garden-seeds">';
+      for (var i = 0; i < PLANTS.length; i++) {
+        var p = PLANTS[i];
+        html += '<button class="garden-seed" data-action="plant" data-plot="' + index + '" data-plant="' + p.id + '">' +
+          '<span class="garden-seed-icon">' + p.svg + '</span>' +
+          '<span class="garden-seed-name">' + esc(p.name) + '</span>' +
+          '<span class="garden-seed-meta">' + p.daysToGrow + '天 · ' + esc(effectText(p.harvest)) + '</span>' +
+          '</button>';
+      }
+      html += '</div></div>';
+      return html;
     }
-    html += '</div>';
-    html += '<div class="garden-feedback' + (ui.gardenMessage && !state.gardenUsedToday ? ' ok' : '') + '">';
-    if (state.gardenUsedToday) {
-      html += '今日已在此休憩，明日再来';
-    } else if (ui.gardenMessage) {
+
+    var plantDef = findPlant(plot.plant);
+    var ready = state.day - plot.plantedDay >= plantDef.daysToGrow;
+    var remaining = plantDef.daysToGrow - (state.day - plot.plantedDay);
+    var progress = ready ? 100 : Math.min(100, Math.round((state.day - plot.plantedDay) / plantDef.daysToGrow * 100));
+
+    var html = '<div class="garden-plot">';
+    html += '<div class="garden-row">' +
+      '<span class="garden-flower' + (ready ? '' : ' dim') + '">' + plantDef.svg + '</span>' +
+      '<div class="garden-info">' +
+      '<div class="garden-plot-head">' +
+      '<span class="garden-plot-name">' + esc(plantDef.name) + '</span>' +
+      '<span class="garden-plot-state">' + (ready ? '盛开 · 可收成' : '还需 ' + remaining + ' 天') + '</span>' +
+      '</div>' +
+      '<div class="garden-desc">' + esc(plantDef.desc) + '</div>';
+    if (!ready) {
+      html += '<div class="garden-progress"><div class="garden-progress-bar" style="width:' + progress + '%;"></div></div>';
+    } else {
+      html += '<button class="garden-harvest" data-action="harvest" data-plot="' + index + '">收成 · ' + esc(effectText(plantDef.harvest)) + '</button>';
+    }
+    html += '</div></div></div>';
+    return html;
+  }
+
+  function renderGarden() {
+    var html = '<div class="card">';
+    html += '<div class="garden-title-row">' +
+      '<h3 class="panel-title">精神后花园</h3>' +
+      '<span class="garden-harvested">已收成 ' + state.garden.harvested + ' 次</span>' +
+      '</div>';
+    html += '<p class="garden-subtitle">种下花籽，几日盛开。收成可补气养神，偶尔还会遇见故人。</p>';
+    for (var i = 0; i < state.garden.plots.length; i++) {
+      html += gardenPlotHtml(i);
+    }
+    html += '<div class="garden-feedback' + (ui.gardenMessage ? ' ok' : '') + '">';
+    if (ui.gardenMessage) {
       html += esc(ui.gardenMessage);
     } else {
-      html += '选择一项行动来恢复健康';
+      html += '空盆即种 · 花开即收 · 细水长流';
     }
     html += '</div>';
     html += '</div>';
@@ -895,7 +1002,7 @@
     var html = '<div class="game-container">';
     html += '<header class="game-header">' +
       '<h1 class="game-title">林则徐 · 都市销烟录</h1>' +
-      '<p class="game-subtitle">30天 · 决定一家公司的命运</p>' +
+      '<p class="game-subtitle">28天 · 决定一家公司的命运</p>' +
       '</header>';
     html += '<div class="main-grid">';
     html += '<section class="event-col"><div class="animate-fade-in">' +
@@ -930,7 +1037,7 @@
     html += '<p>直到那天晚上，我做了一个很长很长的梦。</p>';
     html += '<p>梦里有个穿朝服的人站在虎门海滩上，身后是一箱箱被砸碎的鸦片，海风把他的袍角吹得猎猎作响。他转过身来，我透过那张脸看到了和我一模一样的灵魂。</p>';
     html += '<p>醒来之后我就知道，有些事不能再等了。</p>';
-    html += '<p>一个月后就是公司年终大会。我要在那之前，从我身边做起，把这片灰色的雾赶出去。不是为了什么伟大的理想——只是觉得，<strong>上辈子做过的事，这辈子没道理袖手旁观。</strong></p>';
+    html += '<p>四周后就是公司年终大会。我要在那之前，从我身边做起，把这片灰色的雾赶出去。不是为了什么伟大的理想——只是觉得，<strong>上辈子做过的事，这辈子没道理袖手旁观。</strong></p>';
     html += '</div>';
     html += '<button class="btn-primary" data-action="enter-game">进入游戏</button>';
     html += '</div></div>';
@@ -1030,8 +1137,11 @@
         saveState();
         render();
         break;
-      case 'garden':
-        onGarden(el.getAttribute('data-garden'));
+      case 'plant':
+        onPlant(parseInt(el.getAttribute('data-plot'), 10), el.getAttribute('data-plant'));
+        break;
+      case 'harvest':
+        onHarvest(parseInt(el.getAttribute('data-plot'), 10));
         break;
       case 'equip':
         onToggleProp(el.getAttribute('data-prop'));

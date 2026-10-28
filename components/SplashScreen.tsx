@@ -86,7 +86,7 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
             醒来之后我就知道，有些事不能再等了。
           </p>
           <p className="text-[#5C554D] leading-relaxed text-sm md:text-base">
-            一个月后就是公司年终大会。我要在那之前，从我身边做起，把这片灰色的雾赶出去。不是为了什么伟大的理想——只是觉得，<strong className="text-[#2D2420]">上辈子做过的事，这辈子没道理袖手旁观。</strong>
+            四周后就是公司年终大会。我要在那之前，从我身边做起，把这片灰色的雾赶出去。不是为了什么伟大的理想——只是觉得，<strong className="text-[#2D2420]">上辈子做过的事，这辈子没道理袖手旁观。</strong>
           </p>
         </div>
 

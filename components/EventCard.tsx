@@ -24,7 +24,7 @@ export default function EventCard({ event, onComplete }: EventCardProps) {
   };
 
   const weekNames = ['', '第一周', '第二周', '第三周', '第四周'];
-  const phaseMap: Record<string, string> = { morning: '晨', noon: '午', afternoon: '暮', night: '夜' };
+  const phaseMap: Record<string, string> = { morning: '晨', noon: '午', afternoon: '暮', evening: '晚', night: '夜' };
 
   if (selected) {
     return (
